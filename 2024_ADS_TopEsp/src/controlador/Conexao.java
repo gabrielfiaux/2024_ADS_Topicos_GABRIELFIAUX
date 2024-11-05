@@ -10,9 +10,11 @@ public class Conexao {
 
     //construtor privado de conexao
     private Conexao() throws Exception {
+        
+        // nome do bd "topicos"
         try {
             String driver = "com.mysql.cj.jdbc.Driver";
-            String url = "jdbc:mysql://127.0.0.1/ifpr";
+            String url = "jdbc:mysql://127.0.0.1/topicos";
             String usuario = "root";
             String senha = "";
 

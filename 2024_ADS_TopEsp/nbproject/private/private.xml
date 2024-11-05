@@ -3,10 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Aluno/Documents/2024_ADS_Topicos/2024_ADS_TopEsp/src/visao/UsuarioCadastrar.java</file>
-            <file>file:/C:/Users/Aluno/Documents/2024_ADS_Topicos/2024_ADS_TopEsp/src/visao/UsuarioGerenciar.java</file>
-            <file>file:/C:/Users/Aluno/Documents/2024_ADS_Topicos/2024_ADS_TopEsp/src/visao/UsuarioAlterar.java</file>
-            <file>file:/C:/Users/Aluno/Documents/2024_ADS_Topicos/2024_ADS_TopEsp/src/visao/ProdutoGerenciar.java</file>
+            <file>file:/C:/Users/gfiau/OneDrive/Documentos/GitHub/2024_ADS_Topicos_GABRIELFIAUX/2024_ADS_TopEsp/src/controlador/Conexao.java</file>
+            <file>file:/C:/Users/gfiau/OneDrive/Documentos/GitHub/2024_ADS_Topicos_GABRIELFIAUX/2024_ADS_TopEsp/src/modelo/Usuario.java</file>
+            <file>file:/C:/Users/gfiau/OneDrive/Documentos/GitHub/2024_ADS_Topicos_GABRIELFIAUX/2024_ADS_TopEsp/src/visao/UsuarioCadastrar.java</file>
+            <file>file:/C:/Users/gfiau/OneDrive/Documentos/GitHub/2024_ADS_Topicos_GABRIELFIAUX/2024_ADS_TopEsp/src/controlador/ClienteDao.java</file>
+            <file>file:/C:/Users/gfiau/OneDrive/Documentos/GitHub/2024_ADS_Topicos_GABRIELFIAUX/2024_ADS_TopEsp/src/modelo/Cliente.java</file>
+            <file>file:/C:/Users/gfiau/OneDrive/Documentos/GitHub/2024_ADS_Topicos_GABRIELFIAUX/2024_ADS_TopEsp/src/modelo/Endereco.java</file>
         </group>
     </open-files>
 </project-private>

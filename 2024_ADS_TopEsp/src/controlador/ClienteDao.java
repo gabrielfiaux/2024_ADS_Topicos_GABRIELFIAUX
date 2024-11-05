@@ -10,7 +10,7 @@ import modelo.Cliente;
 public class ClienteDao {
     public int inserir (Cliente Obj) throws Exception {
         int retorno;
-        String sql = "INSERT INTO CLIENTE (nome,cpfcnpj,tipo)" + "values(?,?,?)";
+        String sql = "INSERT INTO cliente (nome,cpfcnpj,tipo)" + "values(?,?,?)";
         Connection conexao = Conexao.getConexao();
         try (PreparedStatement ps = conexao.prepareStatement(sql)){
             ps.setString(1, Obj.getNome());
