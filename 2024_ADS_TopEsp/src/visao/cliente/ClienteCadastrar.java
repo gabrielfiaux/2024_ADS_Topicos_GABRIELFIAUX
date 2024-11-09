@@ -230,35 +230,7 @@ public class ClienteCadastrar extends javax.swing.JFrame {
 
     private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
 
-        
-    
-            //1 - PEGAR OS DADOS DA INTERFACE VISUAL
-            String nome = jTextFieldNome.getText();
-            String cpfCnpj = jTextFieldCpfCnpj.getText();
-            String cep = jTextFieldCep.getText();
-            String endereco = jTextFieldEndereco.getText();
-            String bairro = jTextFieldBairro.getText();
-            String cidade = jTextFieldBairro.getText();
-            String uf = (String) jComboBoxUF.getSelectedItem(); //Usando cast
-            String tipoCliente = jComboBoxTipoCliente.getSelectedItem().toString();
-            if (tipoCliente.equals("Pessoa Física")) {
-                tipoCliente = "PF";
-            } else {
-                tipoCliente = "PJ";
-            }
-
-            //2 - Criar o objeto Cliente com os dados da interface
-            Cliente cliente = new Cliente();
-            cliente.setCpfcnpj(cpfCnpj);
-            cliente.setNome(nome);
-            cliente.setTipo(tipoCliente);
-            try{
-            ClienteDao clienteMethods = new ClienteDao();
-            clienteMethods.inserir(cliente);
-            JOptionPane.showMessageDialog(this, "Cliente Cadastrado");
-            } catch (Exception ex){
-                JOptionPane.showMessageDialog(this, "Cliente Falhou .\n" + ex.getMessage());
-            }
+        cadastrar();
     }//GEN-LAST:event_jButtonCadastrarActionPerformed
 
     private void jButtonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharActionPerformed
@@ -268,8 +240,7 @@ public class ClienteCadastrar extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    
-     public static void main(String args[]) {
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -323,4 +294,32 @@ public class ClienteCadastrar extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldEndereco;
     private javax.swing.JTextField jTextFieldNome;
     // End of variables declaration//GEN-END:variables
+private void cadastrar() {//1 - PEGAR OS DADOS DA INTERFACE VISUAL
+        String nome = jTextFieldNome.getText();
+        String cpfCnpj = jTextFieldCpfCnpj.getText();
+        String cep = jTextFieldCep.getText();
+        String endereco = jTextFieldEndereco.getText();
+        String bairro = jTextFieldBairro.getText();
+        String cidade = jTextFieldBairro.getText();
+        String uf = (String) jComboBoxUF.getSelectedItem(); //Usando cast
+        String tipoCliente = jComboBoxTipoCliente.getSelectedItem().toString();
+        if (tipoCliente.equals("Pessoa Física")) {
+            tipoCliente = "PF";
+        } else {
+            tipoCliente = "PJ";
+        }
+
+        //2 - Criar o objeto Cliente com os dados da interface
+        Cliente cliente = new Cliente();
+        cliente.setCpfcnpj(cpfCnpj);
+        cliente.setNome(nome);
+        cliente.setTipo(tipoCliente);
+        try {
+            ClienteDao clienteMethods = new ClienteDao();
+            clienteMethods.inserir(cliente);
+            JOptionPane.showMessageDialog(this, "Cliente Cadastrado");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Cliente Falhou .\n" + ex.getMessage());
+        }
+    }
 }
