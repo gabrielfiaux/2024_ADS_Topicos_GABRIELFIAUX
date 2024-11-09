@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package visao;
+package visao.produto;
 
+import visao.produto.ProdutoCadastrar;
 import controlador.ProdutoDao;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -49,7 +50,6 @@ public class ProdutoGerenciar extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gerenciar Produtos");
-        setPreferredSize(new java.awt.Dimension(600, 500));
         setSize(new java.awt.Dimension(600, 500));
 
         jtProdutos.setModel(new javax.swing.table.DefaultTableModel(

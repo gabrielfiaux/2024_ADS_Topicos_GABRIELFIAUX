@@ -2,8 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package visao;
+package visao.usuario;
 
+import visao.usuario.UsuarioCadastrar;
+import visao.usuario.UsuarioAlterar;
 import controlador.UsuarioDao;
 import java.util.List;
 import java.util.logging.Level;

@@ -30,7 +30,7 @@
           <Group type="102" alignment="1" attributes="0">
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="145" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Component id="jbFechar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jbCadastrar" min="-2" max="-2" attributes="0"/>
@@ -73,7 +73,7 @@
           <Font name="Segoe UI" size="24" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Cadastro de Grupo de Usuarios"/>
+        <Property name="text" type="java.lang.String" value="Cadastro de Categoria de Produtos"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jlGrupo">

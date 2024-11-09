@@ -4,6 +4,11 @@
  */
 package visao;
 
+import visao.usuario.UsuarioGerenciar;
+import visao.usuario_grupo.GrupoUsuarioGerenciar;
+import visao.produto_categoria.CategoriaProdutoGerenciar;
+import visao.produto.ProdutoGerenciar;
+
 /**
  *
  * @author Aluno
