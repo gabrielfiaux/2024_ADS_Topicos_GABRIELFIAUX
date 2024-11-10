@@ -4,23 +4,16 @@
  */
 package visao.cliente;
 
-import controlador.ClienteDao;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import modelo.Cliente;
-import visao.Principal;
-
 /**
  *
- * @author aluno
+ * @author gfiau
  */
-public class ClienteCadastrar extends javax.swing.JFrame {
+public class ClienteAlterar extends javax.swing.JFrame {
 
     /**
-     * Creates new form ClienteCadastrar
+     * Creates new form ClienteAlterar
      */
-    public ClienteCadastrar() {
+    public ClienteAlterar() {
         initComponents();
     }
 
@@ -33,10 +26,8 @@ public class ClienteCadastrar extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextFieldNome = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        jButtonCadastrar = new javax.swing.JButton();
         jComboBoxTipoCliente = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jTextFieldCpfCnpj = new javax.swing.JTextField();
@@ -51,23 +42,24 @@ public class ClienteCadastrar extends javax.swing.JFrame {
         jComboBoxUF = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         jTextFieldCep = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jTextFieldNome = new javax.swing.JTextField();
         jButtonFechar = new javax.swing.JButton();
-        jButtonCadastrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Cadastro de cliente");
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Cadastro de Cliente");
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Nome:");
-
-        jTextFieldNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Tipo de Cliente:");
+
+        jButtonCadastrar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtonCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/alterar.png"))); // NOI18N
+        jButtonCadastrar.setText("Alterar");
+        jButtonCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCadastrarActionPerformed(evt);
+            }
+        });
 
         jComboBoxTipoCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pessoa Física", "Pessoa Jurídica" }));
 
@@ -153,21 +145,21 @@ public class ClienteCadastrar extends javax.swing.JFrame {
                 .addGap(16, 16, 16))
         );
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Alterar Cliente");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setText("Nome:");
+
+        jTextFieldNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
         jButtonFechar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButtonFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jButtonFechar.setText("Fechar");
         jButtonFechar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonFecharActionPerformed(evt);
-            }
-        });
-
-        jButtonCadastrar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButtonCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/salvar.png"))); // NOI18N
-        jButtonCadastrar.setText("Cadastrar");
-        jButtonCadastrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCadastrarActionPerformed(evt);
             }
         });
 
@@ -192,7 +184,7 @@ public class ClienteCadastrar extends javax.swing.JFrame {
                                 .addGap(12, 12, 12)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldCpfCnpj, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE))))
+                                .addComponent(jTextFieldCpfCnpj, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButtonFechar)
@@ -221,16 +213,15 @@ public class ClienteCadastrar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonFechar)
                     .addComponent(jButtonCadastrar))
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
 
-        cadastrar();
+      
     }//GEN-LAST:event_jButtonCadastrarActionPerformed
 
     private void jButtonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharActionPerformed
@@ -254,20 +245,20 @@ public class ClienteCadastrar extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClienteAlterar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClienteAlterar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClienteAlterar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClienteAlterar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ClienteCadastrar().setVisible(true);
+                new ClienteAlterar().setVisible(true);
             }
         });
     }
@@ -294,32 +285,4 @@ public class ClienteCadastrar extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldEndereco;
     private javax.swing.JTextField jTextFieldNome;
     // End of variables declaration//GEN-END:variables
-private void cadastrar() {//1 - PEGAR OS DADOS DA INTERFACE VISUAL
-        String nome = jTextFieldNome.getText();
-        String cpfCnpj = jTextFieldCpfCnpj.getText();
-        String cep = jTextFieldCep.getText();
-        String endereco = jTextFieldEndereco.getText();
-        String bairro = jTextFieldBairro.getText();
-        String cidade = jTextFieldBairro.getText();
-        String uf = (String) jComboBoxUF.getSelectedItem(); //Usando cast
-        String tipoCliente = jComboBoxTipoCliente.getSelectedItem().toString();
-        if (tipoCliente.equals("Pessoa Física")) {
-            tipoCliente = "PF";
-        } else {
-            tipoCliente = "PJ";
-        }
-
-        //2 - Criar o objeto Cliente com os dados da interface
-        Cliente cliente = new Cliente();
-        cliente.setCpfcnpj(cpfCnpj);
-        cliente.setNome(nome);
-        cliente.setTipo(tipoCliente);
-        try {
-            ClienteDao clienteMethods = new ClienteDao();
-            clienteMethods.inserir(cliente);
-            JOptionPane.showMessageDialog(this, "Cliente Cadastrado");
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Cliente Falhou .\n" + ex.getMessage());
-        }
-    }
 }
