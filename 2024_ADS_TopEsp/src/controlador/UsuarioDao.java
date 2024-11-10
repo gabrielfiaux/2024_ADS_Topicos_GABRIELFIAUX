@@ -121,5 +121,7 @@ public void inserir(Usuario u) throws Exception {
             return ps.executeUpdate() == 1;
         }
     }
+    
+    
 
 }
