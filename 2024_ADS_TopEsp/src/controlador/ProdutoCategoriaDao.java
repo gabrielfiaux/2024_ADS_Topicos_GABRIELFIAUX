@@ -7,8 +7,13 @@ package controlador;
 import controlador.conexao.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import modelo.Produto;
 import modelo.ProdutoCategoria;
 
 /**
@@ -57,6 +62,34 @@ public class ProdutoCategoriaDao {
         return lista;
     }
 
+    public List<ProdutoCategoria> listar(){
+    String sql = "SELECT * FROM produto_categoria";
+    Connection conexao = null;
+        try {
+            conexao = Conexao.getConexao();
+        } catch (Exception ex) {
+            Logger.getLogger(ProdutoCategoriaDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    List<ProdutoCategoria> lista = new ArrayList<>();
+    
+    
+        try {
+            PreparedStatement pstm = conexao.prepareStatement(sql);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                    ProdutoCategoria pc = new ProdutoCategoria();
+                    pc.setId(rs.getInt("id"));
+                    pc.setNomeCategoria(rs.getString("nome"));
+                    lista.add(pc);
+                }
+            
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ProdutoCadegoriaDao.listar");
+        }
+       return lista;
+    }
+    
     public void excluir(Integer id) throws Exception {
         String sql = "DELETE FROM produto_categoria WHERE id = ?";
         Connection conexao = Conexao.getConexao();
