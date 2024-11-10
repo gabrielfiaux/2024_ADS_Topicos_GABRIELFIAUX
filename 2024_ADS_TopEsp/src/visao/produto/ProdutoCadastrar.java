@@ -7,6 +7,7 @@ package visao.produto;
 import controlador.ProdutoDao;
 import javax.swing.JOptionPane;
 import modelo.Produto;
+import visao.produto.ProdutoGerenciar;
 
 /**
  *
@@ -96,23 +97,8 @@ public class ProdutoCadastrar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarActionPerformed
-        // TODO add your handling code here:
-        Produto produto = new Produto();
-        produto.setNomeProduto(jtfNome.getText());
-        produto.setUnidadeDeMedida(jtfUnidade.getText());
-        if (produto.getNomeProduto().isBlank() || produto.getUnidadeDeMedida().isBlank()) {
-            JOptionPane.showMessageDialog(this, "Não pode ser nulo");
-        } else {
-            try {
-                ProdutoDao produtoMethods = new ProdutoDao();
-                produtoMethods.inserir(produto);
-                JOptionPane.showMessageDialog(this, "Produto Cadastrado");
-                jtfNome.setText("");
-                jtfUnidade.setText("");
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Cadastro de Produto Falhou \n" + ex.getMessage());
-            }
-        }
+        cadastrar();
+
     }//GEN-LAST:event_jbCadastrarActionPerformed
 
     /**
@@ -158,4 +144,25 @@ public class ProdutoCadastrar extends javax.swing.JFrame {
     private javax.swing.JTextField jtfNome;
     private javax.swing.JTextField jtfUnidade;
     // End of variables declaration//GEN-END:variables
+
+    private void cadastrar() {
+        Produto produto = new Produto();
+        produto.setNomeProduto(jtfNome.getText());
+        produto.setUnidadeDeMedida(jtfUnidade.getText());
+        if (produto.getNomeProduto().isBlank() || produto.getUnidadeDeMedida().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Não pode ser nulo");
+        } else {
+            try {
+                ProdutoDao produtoMethods = new ProdutoDao();
+                produtoMethods.inserir(produto);
+                JOptionPane.showMessageDialog(this, "Produto Cadastrado");
+                jtfNome.setText("");
+                jtfUnidade.setText("");
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Cadastro de Produto Falhou \n" + ex.getMessage());
+            }
+        }
+
+    }
+
 }

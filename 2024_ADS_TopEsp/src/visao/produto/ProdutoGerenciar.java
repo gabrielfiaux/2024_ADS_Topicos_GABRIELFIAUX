@@ -47,6 +47,7 @@ public class ProdutoGerenciar extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jtfPesquisar = new javax.swing.JTextField();
         jbCadastrar = new javax.swing.JButton();
+        jbListar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gerenciar Produtos");
@@ -91,6 +92,9 @@ public class ProdutoGerenciar extends javax.swing.JFrame {
             }
         });
         jtfPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtfPesquisarKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtfPesquisarKeyReleased(evt);
             }
@@ -104,29 +108,38 @@ public class ProdutoGerenciar extends javax.swing.JFrame {
             }
         });
 
+        jbListar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/lista.png"))); // NOI18N
+        jbListar.setText("Atualizar");
+        jbListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbListarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 667, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 667, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addComponent(jtfPesquisar))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jbCadastrar, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jbAlterar)
-                                .addGap(18, 18, 18)
-                                .addComponent(jbExcluir)))))
+                        .addComponent(jbCadastrar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jbListar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbAlterar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbExcluir)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -145,7 +158,8 @@ public class ProdutoGerenciar extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbExcluir)
-                    .addComponent(jbAlterar))
+                    .addComponent(jbAlterar)
+                    .addComponent(jbListar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14))
         );
 
@@ -195,29 +209,18 @@ public class ProdutoGerenciar extends javax.swing.JFrame {
 
     private void jtfPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfPesquisarKeyReleased
         // TODO add your handling code here:
-        String campoPesquisa = jtfPesquisar.getText();
-        DefaultTableModel modelo = (DefaultTableModel) jtProdutos.getModel();
-        modelo.setNumRows(0); // limpa os campos
-
-        try {
-            ProdutoDao dao = new ProdutoDao();
-            List<Produto> lista = dao.buscar(campoPesquisa);
-            for (Produto produto : lista) {
-                String[] linhadaTabela = {
-                    String.valueOf(produto.getId()),
-                    produto.getNomeProduto(),
-                    produto.getUnidadeDeMedida(),
-                    String.valueOf(produto.getDataCadastro())
-                };
-                modelo.addRow(linhadaTabela); // adiciona uma linha na tabela
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Erro ao pesquisar: " + e.getMessage());
-
-        }
+        buscar();
     }//GEN-LAST:event_jtfPesquisarKeyReleased
+
+    private void jtfPesquisarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfPesquisarKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfPesquisarKeyPressed
+
+    private void jbListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbListarActionPerformed
+        
+        listar();
+        
+    }//GEN-LAST:event_jbListarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -261,7 +264,60 @@ public class ProdutoGerenciar extends javax.swing.JFrame {
     private javax.swing.JButton jbAlterar;
     private javax.swing.JButton jbCadastrar;
     private javax.swing.JButton jbExcluir;
+    private javax.swing.JButton jbListar;
     private javax.swing.JTable jtProdutos;
     private javax.swing.JTextField jtfPesquisar;
     // End of variables declaration//GEN-END:variables
+ private void buscar() {
+        String campoPesquisa = jtfPesquisar.getText();
+        DefaultTableModel modelo = (DefaultTableModel) jtProdutos.getModel();
+        modelo.setNumRows(0); // limpa os campos
+
+        try {
+            ProdutoDao dao = new ProdutoDao();
+            List<Produto> lista = dao.buscar(campoPesquisa);
+            for (Produto produto : lista) {
+                String[] linhadaTabela = {
+                    String.valueOf(produto.getId()),
+                    produto.getNomeProduto(),
+                    produto.getUnidadeDeMedida(),
+                    String.valueOf(produto.getDataCadastro())
+                };
+                modelo.addRow(linhadaTabela); // adiciona uma linha na tabela
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Erro ao pesquisar: " + e.getMessage());
+
+        }
+    }
+
+    private void listar() {
+
+        try {
+            ProdutoDao dao = new ProdutoDao();
+            DefaultTableModel modelo = (DefaultTableModel) jtProdutos.getModel();
+            modelo.setNumRows(0); // limpa os campos
+            
+            List<Produto> lista = dao.listar();
+            
+            for (Produto produto : lista) {
+                String[] linhadaTabela = {
+                    String.valueOf(produto.getId()),
+                    produto.getNomeProduto(),
+                    produto.getUnidadeDeMedida(),
+                    String.valueOf(produto.getDataCadastro())
+                };
+                modelo.addRow(linhadaTabela); // adiciona uma linha na tabela
+            }
+            
+            
+        } catch (Exception e) {
+             e.printStackTrace();
+              JOptionPane.showMessageDialog(this, "Erro ao listar: " + e.getMessage());
+        }
+
+    }
+
 }
