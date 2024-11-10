@@ -4,10 +4,7 @@
  */
 package visao.cliente;
 
-/**
- *
- * @author gfiau
- */
+//ola
 public class ClienteGerenciar extends javax.swing.JFrame {
 
     /**
