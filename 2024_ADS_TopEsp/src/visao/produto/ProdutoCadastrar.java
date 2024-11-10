@@ -2,11 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package visao;
+package visao.produto;
 
 import controlador.ProdutoDao;
 import javax.swing.JOptionPane;
 import modelo.Produto;
+import visao.produto.ProdutoGerenciar;
 
 /**
  *
@@ -36,6 +37,7 @@ public class ProdutoCadastrar extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jtfUnidade = new javax.swing.JTextField();
         jbCadastrar = new javax.swing.JButton();
+        jbFechar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -57,6 +59,14 @@ public class ProdutoCadastrar extends javax.swing.JFrame {
             }
         });
 
+        jbFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
+        jbFechar.setText("Fechar");
+        jbFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbFecharActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -64,13 +74,15 @@ public class ProdutoCadastrar extends javax.swing.JFrame {
             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbCadastrar)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel3)
-                        .addComponent(jLabel2)
-                        .addComponent(jtfNome)
-                        .addComponent(jtfUnidade, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2)
+                    .addComponent(jtfNome)
+                    .addComponent(jtfUnidade, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jbFechar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbCadastrar)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -87,7 +99,9 @@ public class ProdutoCadastrar extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtfUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-                .addComponent(jbCadastrar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbCadastrar)
+                    .addComponent(jbFechar))
                 .addGap(14, 14, 14))
         );
 
@@ -96,24 +110,13 @@ public class ProdutoCadastrar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarActionPerformed
-        // TODO add your handling code here:
-        Produto produto = new Produto();
-        produto.setNomeProduto(jtfNome.getText());
-        produto.setUnidadeDeMedida(jtfUnidade.getText());
-        if (produto.getNomeProduto().isBlank() || produto.getUnidadeDeMedida().isBlank()) {
-            JOptionPane.showMessageDialog(this, "Não pode ser nulo");
-        } else {
-            try {
-                ProdutoDao produtoMethods = new ProdutoDao();
-                produtoMethods.inserir(produto);
-                JOptionPane.showMessageDialog(this, "Produto Cadastrado");
-                jtfNome.setText("");
-                jtfUnidade.setText("");
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Cadastro de Produto Falhou \n" + ex.getMessage());
-            }
-        }
+        cadastrar();
+
     }//GEN-LAST:event_jbCadastrarActionPerformed
+
+    private void jbFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbFecharActionPerformed
+        dispose();
+    }//GEN-LAST:event_jbFecharActionPerformed
 
     /**
      * @param args the command line arguments
@@ -155,7 +158,29 @@ public class ProdutoCadastrar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JButton jbCadastrar;
+    private javax.swing.JButton jbFechar;
     private javax.swing.JTextField jtfNome;
     private javax.swing.JTextField jtfUnidade;
     // End of variables declaration//GEN-END:variables
+
+    private void cadastrar() {
+        Produto produto = new Produto();
+        produto.setNomeProduto(jtfNome.getText());
+        produto.setUnidadeDeMedida(jtfUnidade.getText());
+        if (produto.getNomeProduto().isBlank() || produto.getUnidadeDeMedida().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Não pode ser nulo");
+        } else {
+            try {
+                ProdutoDao produtoMethods = new ProdutoDao();
+                produtoMethods.inserir(produto);
+                JOptionPane.showMessageDialog(this, "Produto Cadastrado");
+                jtfNome.setText("");
+                jtfUnidade.setText("");
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Cadastro de Produto Falhou \n" + ex.getMessage());
+            }
+        }
+
+    }
+
 }

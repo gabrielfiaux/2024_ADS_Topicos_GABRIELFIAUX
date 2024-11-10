@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package visao;
+package visao.produto_categoria;
 
 import controlador.ProdutoCategoriaDao;
 import java.util.List;
@@ -46,12 +46,13 @@ public class CategoriaProdutoGerenciar extends javax.swing.JFrame {
         jbAlterar = new javax.swing.JButton();
         jlPesquisa = new javax.swing.JLabel();
         jtfPesquisar = new javax.swing.JTextField();
+        jbListar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Categoria De Produtos");
+        jLabel1.setText("Categorias De Produtos");
         jLabel1.setToolTipText("");
 
         jtCategoria.setModel(new javax.swing.table.DefaultTableModel(
@@ -92,6 +93,14 @@ public class CategoriaProdutoGerenciar extends javax.swing.JFrame {
             }
         });
 
+        jbListar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/lista.png"))); // NOI18N
+        jbListar.setText("Atualizar");
+        jbListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbListarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -100,13 +109,8 @@ public class CategoriaProdutoGerenciar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 374, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jbCadastrar, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jbAlterar)
-                                .addGap(18, 18, 18)
-                                .addComponent(jbExcluir))))
+                        .addGap(0, 478, Short.MAX_VALUE)
+                        .addComponent(jbCadastrar))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -114,7 +118,14 @@ public class CategoriaProdutoGerenciar extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jlPesquisa)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtfPesquisar)))))
+                                .addComponent(jtfPesquisar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jbListar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbAlterar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbExcluir)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -132,7 +143,8 @@ public class CategoriaProdutoGerenciar extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbExcluir)
-                    .addComponent(jbAlterar))
+                    .addComponent(jbAlterar)
+                    .addComponent(jbListar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -146,54 +158,18 @@ public class CategoriaProdutoGerenciar extends javax.swing.JFrame {
     }//GEN-LAST:event_jbCadastrarActionPerformed
 
     private void jtfPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfPesquisarKeyReleased
-        // TODO add your handling code here:
-        String campoPesquisa = jtfPesquisar.getText();
-        DefaultTableModel modelo = (DefaultTableModel) jtCategoria.getModel();
-        modelo.setNumRows(0); // limpa os campos
-        try {
-            ProdutoCategoriaDao dao = new ProdutoCategoriaDao();
-            List<ProdutoCategoria> lista = dao.buscar(campoPesquisa);
-
-            for (ProdutoCategoria produtoCategoria : lista) {
-                String[] linhadaTabela = {
-                    String.valueOf(produtoCategoria.getId()),
-                    produtoCategoria.getNomeCategoria()
-                };
-                modelo.addRow(linhadaTabela); // adiciona uma linha na tabela
-
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Erro ao pesquisar: " + e.getMessage());
-
-        }
+        pesquisar();
     }//GEN-LAST:event_jtfPesquisarKeyReleased
 
     private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExcluirActionPerformed
-        // TODO add your handling code here:
-        int linhaSelecionado = jtCategoria.getSelectedRow();
-        if (linhaSelecionado != -1) {
-            int opcao = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", JOptionPane.YES_NO_CANCEL_OPTION);
-            if (opcao == JOptionPane.YES_OPTION) {
-
-                int id = Integer.parseInt(jtCategoria.getModel().getValueAt(
-                        linhaSelecionado, 0).toString());
-                ProdutoCategoriaDao dao = new ProdutoCategoriaDao();
-                try {
-                    dao.excluir(id);
-                    JOptionPane.showMessageDialog(this, "Categoria de Produto Excluido");
-                    DefaultTableModel modelo = ((DefaultTableModel) jtCategoria.getModel());
-                    modelo.removeRow(linhaSelecionado);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    JOptionPane.showMessageDialog(this, "Erro ao pesquisar: " + e.getMessage());
-                }
-
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Selecione um Registro para excluir");
-        }
+        excluir();
     }//GEN-LAST:event_jbExcluirActionPerformed
+
+    private void jbListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbListarActionPerformed
+
+        listar();
+
+    }//GEN-LAST:event_jbListarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -239,8 +215,84 @@ public class CategoriaProdutoGerenciar extends javax.swing.JFrame {
     private javax.swing.JButton jbAlterar;
     private javax.swing.JButton jbCadastrar;
     private javax.swing.JButton jbExcluir;
+    private javax.swing.JButton jbListar;
     private javax.swing.JLabel jlPesquisa;
     private javax.swing.JTable jtCategoria;
     private javax.swing.JTextField jtfPesquisar;
     // End of variables declaration//GEN-END:variables
+
+    private void pesquisar(){
+    // TODO add your handling code here:
+        String campoPesquisa = jtfPesquisar.getText();
+        DefaultTableModel modelo = (DefaultTableModel) jtCategoria.getModel();
+        modelo.setNumRows(0); // limpa os campos
+        try {
+            ProdutoCategoriaDao dao = new ProdutoCategoriaDao();
+            List<ProdutoCategoria> lista = dao.buscar(campoPesquisa);
+
+            for (ProdutoCategoria produtoCategoria : lista) {
+                String[] linhadaTabela = {
+                    String.valueOf(produtoCategoria.getId()),
+                    produtoCategoria.getNomeCategoria()
+                };
+                modelo.addRow(linhadaTabela); // adiciona uma linha na tabela
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Erro ao pesquisar: " + e.getMessage());
+
+        }
+    }
+    
+    private void listar() {
+
+        try {
+            ProdutoCategoriaDao dao = new ProdutoCategoriaDao();
+            DefaultTableModel modelo = (DefaultTableModel) jtCategoria.getModel();
+            modelo.setNumRows(0); // limpa os campos
+            
+            List<ProdutoCategoria> lista = dao.listar();
+            
+            for (ProdutoCategoria produtoCategoria : lista) {
+                 String[] linhadaTabela = {
+                    String.valueOf(produtoCategoria.getId()),
+                    produtoCategoria.getNomeCategoria()
+                };
+                modelo.addRow(linhadaTabela);}
+            
+            
+        } catch (Exception e) {
+             e.printStackTrace();
+              JOptionPane.showMessageDialog(this, "Erro ao listar: " + e.getMessage());
+        }
+
+    }
+    
+    private void excluir(){
+    // TODO add your handling code here:
+        int linhaSelecionado = jtCategoria.getSelectedRow();
+        if (linhaSelecionado != -1) {
+            int opcao = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", JOptionPane.YES_NO_CANCEL_OPTION);
+            if (opcao == JOptionPane.YES_OPTION) {
+
+                int id = Integer.parseInt(jtCategoria.getModel().getValueAt(
+                        linhaSelecionado, 0).toString());
+                ProdutoCategoriaDao dao = new ProdutoCategoriaDao();
+                try {
+                    dao.excluir(id);
+                    JOptionPane.showMessageDialog(this, "Categoria de Produto Excluido");
+                    DefaultTableModel modelo = ((DefaultTableModel) jtCategoria.getModel());
+                    modelo.removeRow(linhaSelecionado);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(this, "Erro ao pesquisar: " + e.getMessage());
+                }
+
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um Registro para excluir");
+        }
+    }
+
 }

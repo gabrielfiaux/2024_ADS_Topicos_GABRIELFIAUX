@@ -2,32 +2,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package visao;
-
-import controlador.UsuarioDao;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import modelo.Usuario;
+package visao.cliente;
 
 /**
  *
- * @author Aluno
+ * @author gfiau
  */
-public class UsuarioGerenciar extends javax.swing.JFrame {
+public class ClienteGerenciar extends javax.swing.JFrame {
 
     /**
-     * Creates new form UsuarioGerenciar
+     * Creates new form ClienteGerenciar
      */
-    public UsuarioGerenciar() {
+    public ClienteGerenciar() {
         initComponents();
-        jtfPesquisaKeyReleased(null);
     }
-    public void atualizarTabela(){
-        jtfPesquisaKeyReleased(null);
-    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,6 +26,7 @@ public class UsuarioGerenciar extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnNovo = new javax.swing.JButton();
         jlbTitulo = new javax.swing.JLabel();
         jlbPesquisar = new javax.swing.JLabel();
         jtfPesquisa = new javax.swing.JTextField();
@@ -46,12 +36,20 @@ public class UsuarioGerenciar extends javax.swing.JFrame {
         jlbinformacoesAdicionais1 = new javax.swing.JLabel();
         jlbinformacoesAdicionais2 = new javax.swing.JLabel();
         btnExcluir = new javax.swing.JButton();
-        btnNovo = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        btnNovo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
+        btnNovo.setText("Novo");
+        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoActionPerformed(evt);
+            }
+        });
 
         jlbTitulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jlbTitulo.setText("Gerenciar Usuário");
+        jlbTitulo.setText("Gerenciar Cliente");
 
         jlbPesquisar.setText("Pesquisar por nome:");
 
@@ -99,7 +97,7 @@ public class UsuarioGerenciar extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -120,15 +118,6 @@ public class UsuarioGerenciar extends javax.swing.JFrame {
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExcluirActionPerformed(evt);
-            }
-        });
-
-        btnNovo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
-        btnNovo.setText("Novo");
-        btnNovo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNovoActionPerformed(evt);
             }
         });
 
@@ -181,38 +170,8 @@ public class UsuarioGerenciar extends javax.swing.JFrame {
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        int linhaSelecionado = jtbUsuario.getSelectedRow();
-        if (linhaSelecionado != -1) {
-            int opcao = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", JOptionPane.YES_NO_CANCEL_OPTION);
-            if (opcao == JOptionPane.YES_OPTION) {
-
-                int id = Integer.parseInt(jtbUsuario.getModel().getValueAt(
-                        linhaSelecionado, 0).toString());
-                UsuarioDao dao = new UsuarioDao();
-                try {
-                    dao.excluir(id);
-                    JOptionPane.showMessageDialog(this, "Usuario Excluido");
-                    DefaultTableModel modelo = ((DefaultTableModel) jtbUsuario.getModel());
-                    modelo.removeRow(linhaSelecionado);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    JOptionPane.showMessageDialog(this, "Erro ao pesquisar: " + e.getMessage());
-                }
-
-            }
-        } else{
-            JOptionPane.showMessageDialog(null, "Selecione um Registro para excluir");
-        }
-    }//GEN-LAST:event_btnExcluirActionPerformed
-
-    private void cadastrar() {
-        UsuarioCadastrar uc = new UsuarioCadastrar();
-        uc.setVisible(true);
-    }
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         cadastrar();
     }//GEN-LAST:event_btnNovoActionPerformed
@@ -245,17 +204,42 @@ public class UsuarioGerenciar extends javax.swing.JFrame {
 
     private void jtbUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbUsuarioMouseClicked
         // TODO add your handling code here:
-         if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 2) {
             int linhaSelecionada = jtbUsuario.getSelectedRow();
             Integer id = Integer.parseInt(
-                    jtbUsuario.getModel().getValueAt(linhaSelecionada, 0).toString()
+                jtbUsuario.getModel().getValueAt(linhaSelecionada, 0).toString()
             );
             UsuarioAlterar form = new UsuarioAlterar();
             form.setVisible(true);
             form.linkUsuarioGerenciarForm = this;
             form.mostrarUsuario(id);
-         }
+        }
     }//GEN-LAST:event_jtbUsuarioMouseClicked
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        int linhaSelecionado = jtbUsuario.getSelectedRow();
+        if (linhaSelecionado != -1) {
+            int opcao = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", JOptionPane.YES_NO_CANCEL_OPTION);
+            if (opcao == JOptionPane.YES_OPTION) {
+
+                int id = Integer.parseInt(jtbUsuario.getModel().getValueAt(
+                    linhaSelecionado, 0).toString());
+            UsuarioDao dao = new UsuarioDao();
+            try {
+                dao.excluir(id);
+                JOptionPane.showMessageDialog(this, "Usuario Excluido");
+                DefaultTableModel modelo = ((DefaultTableModel) jtbUsuario.getModel());
+                modelo.removeRow(linhaSelecionado);
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Erro ao pesquisar: " + e.getMessage());
+            }
+
+        }
+        } else{
+            JOptionPane.showMessageDialog(null, "Selecione um Registro para excluir");
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -274,20 +258,20 @@ public class UsuarioGerenciar extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UsuarioGerenciar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClienteGerenciar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UsuarioGerenciar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClienteGerenciar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UsuarioGerenciar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClienteGerenciar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UsuarioGerenciar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClienteGerenciar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UsuarioGerenciar().setVisible(true);
+                new ClienteGerenciar().setVisible(true);
             }
         });
     }

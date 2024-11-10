@@ -2,32 +2,33 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package visao;
+package visao.usuario_grupo;
 
-import controlador.ProdutoDao;
+import visao.usuario_grupo.GrupoUsuarioCadastrar;
+import controlador.GrupoUsuarioDao;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import modelo.Produto;
+import modelo.GrupoUsuario;
 
 /**
  *
- * @author Aluno
+ * @author Douglas Sugano
  */
-public class ProdutoGerenciar extends javax.swing.JFrame {
+public class GrupoUsuarioGerenciar extends javax.swing.JFrame {
 
     /**
-     * Creates new form ProdutoGerenciar
+     * Creates new form GrupoUsuarioGerenciar
      */
-    public ProdutoGerenciar() {
+    public GrupoUsuarioGerenciar() {
         initComponents();
         jtfPesquisarKeyReleased(null);
     }
 
     private void cadastrar() {
-        ProdutoCadastrar p = new ProdutoCadastrar();
-        p.setVisible(true);
-    }        // TODO add your handling code here:
+        GrupoUsuarioCadastrar g = new GrupoUsuarioCadastrar();
+        g.setVisible(true);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -38,35 +39,38 @@ public class ProdutoGerenciar extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jtProdutos = new javax.swing.JTable();
-        jbAlterar = new javax.swing.JButton();
-        jbExcluir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jtfPesquisar = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtGrupo = new javax.swing.JTable();
         jbCadastrar = new javax.swing.JButton();
+        jbExcluir = new javax.swing.JButton();
+        jbAlterar = new javax.swing.JButton();
+        jlPesquisa = new javax.swing.JLabel();
+        jtfPesquisar = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Gerenciar Produtos");
-        setPreferredSize(new java.awt.Dimension(600, 500));
-        setSize(new java.awt.Dimension(600, 500));
 
-        jtProdutos.setModel(new javax.swing.table.DefaultTableModel(
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Grupo de Usuarios");
+        jLabel1.setToolTipText("");
+
+        jtGrupo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Nome", "Unidade de Medida", "Data de Cadastro"
+                "ID", "Nome do Grupo"
             }
         ));
-        jScrollPane1.setViewportView(jtProdutos);
+        jScrollPane1.setViewportView(jtGrupo);
 
-        jbAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/alterar.png"))); // NOI18N
-        jbAlterar.setText("Alterar");
-        jbAlterar.addActionListener(new java.awt.event.ActionListener() {
+        jbCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
+        jbCadastrar.setText("Cadastrar");
+        jbCadastrar.setToolTipText("");
+        jbCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbAlterarActionPerformed(evt);
+                jbCadastrarActionPerformed(evt);
             }
         });
 
@@ -78,13 +82,11 @@ public class ProdutoGerenciar extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Produto");
+        jbAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/alterar.png"))); // NOI18N
+        jbAlterar.setText("Alterar");
 
-        jLabel2.setText("Pesquisar: ");
+        jlPesquisa.setText("Pesquisar:");
 
-        jtfPesquisar.setToolTipText("");
         jtfPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfPesquisarActionPerformed(evt);
@@ -96,57 +98,48 @@ public class ProdutoGerenciar extends javax.swing.JFrame {
             }
         });
 
-        jbCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
-        jbCadastrar.setText("Cadastrar");
-        jbCadastrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbCadastrarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 667, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jtfPesquisar))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 358, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jbCadastrar, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jbAlterar)
                                 .addGap(18, 18, 18)
-                                .addComponent(jbExcluir)))))
+                                .addComponent(jbExcluir))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jlPesquisa)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtfPesquisar)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbCadastrar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jlPesquisa)
+                    .addComponent(jtfPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbExcluir)
                     .addComponent(jbAlterar))
-                .addGap(14, 14, 14))
+                .addContainerGap())
         );
 
         pack();
@@ -159,27 +152,49 @@ public class ProdutoGerenciar extends javax.swing.JFrame {
     }//GEN-LAST:event_jbCadastrarActionPerformed
 
     private void jtfPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfPesquisarActionPerformed
-
+        // TODO add your handling code here:
     }//GEN-LAST:event_jtfPesquisarActionPerformed
 
-    private void jbAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlterarActionPerformed
+    private void jtfPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfPesquisarKeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_jbAlterarActionPerformed
+        String campoPesquisa = jtfPesquisar.getText();
+        DefaultTableModel modelo = (DefaultTableModel) jtGrupo.getModel();
+        modelo.setNumRows(0); // limpa os campos
+
+        try {
+            GrupoUsuarioDao dao = new GrupoUsuarioDao();
+            List<GrupoUsuario> lista = dao.buscar(campoPesquisa);
+
+            for (GrupoUsuario usuario : lista) {
+                String[] linhadaTabela = {
+                    String.valueOf(usuario.getId()),
+                    usuario.getNomeGrupo()
+                };
+                modelo.addRow(linhadaTabela); // adiciona uma linha na tabela
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Erro ao pesquisar: " + e.getMessage());
+
+        }
+    }//GEN-LAST:event_jtfPesquisarKeyReleased
 
     private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExcluirActionPerformed
         // TODO add your handling code here:
-        int linhaSelecionado = jtProdutos.getSelectedRow();
+        int linhaSelecionado = jtGrupo.getSelectedRow();
         if (linhaSelecionado != -1) {
             int opcao = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", JOptionPane.YES_NO_CANCEL_OPTION);
             if (opcao == JOptionPane.YES_OPTION) {
 
-                int id = Integer.parseInt(jtProdutos.getModel().getValueAt(
+                int id = Integer.parseInt(jtGrupo.getModel().getValueAt(
                         linhaSelecionado, 0).toString());
-                ProdutoDao dao = new ProdutoDao();
+                GrupoUsuarioDao dao = new GrupoUsuarioDao();
                 try {
                     dao.excluir(id);
-                    JOptionPane.showMessageDialog(this, "Produto Excluido");
-                    DefaultTableModel modelo = ((DefaultTableModel) jtProdutos.getModel());
+                    JOptionPane.showMessageDialog(this, "Grupo de Usuario Excluido");
+                    DefaultTableModel modelo = ((DefaultTableModel) jtGrupo.getModel());
                     modelo.removeRow(linhaSelecionado);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -190,34 +205,7 @@ public class ProdutoGerenciar extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Selecione um Registro para excluir");
         }
-
     }//GEN-LAST:event_jbExcluirActionPerformed
-
-    private void jtfPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfPesquisarKeyReleased
-        // TODO add your handling code here:
-        String campoPesquisa = jtfPesquisar.getText();
-        DefaultTableModel modelo = (DefaultTableModel) jtProdutos.getModel();
-        modelo.setNumRows(0); // limpa os campos
-
-        try {
-            ProdutoDao dao = new ProdutoDao();
-            List<Produto> lista = dao.buscar(campoPesquisa);
-            for (Produto produto : lista) {
-                String[] linhadaTabela = {
-                    String.valueOf(produto.getId()),
-                    produto.getNomeProduto(),
-                    produto.getUnidadeDeMedida(),
-                    String.valueOf(produto.getDataCadastro())
-                };
-                modelo.addRow(linhadaTabela); // adiciona uma linha na tabela
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Erro ao pesquisar: " + e.getMessage());
-
-        }
-    }//GEN-LAST:event_jtfPesquisarKeyReleased
 
     /**
      * @param args the command line arguments
@@ -236,32 +224,32 @@ public class ProdutoGerenciar extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ProdutoGerenciar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GrupoUsuarioGerenciar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ProdutoGerenciar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GrupoUsuarioGerenciar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ProdutoGerenciar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GrupoUsuarioGerenciar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ProdutoGerenciar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GrupoUsuarioGerenciar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ProdutoGerenciar().setVisible(true);
+                new GrupoUsuarioGerenciar().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbAlterar;
     private javax.swing.JButton jbCadastrar;
     private javax.swing.JButton jbExcluir;
-    private javax.swing.JTable jtProdutos;
+    private javax.swing.JLabel jlPesquisa;
+    private javax.swing.JTable jtGrupo;
     private javax.swing.JTextField jtfPesquisar;
     // End of variables declaration//GEN-END:variables
 }
