@@ -142,25 +142,7 @@ public class UsuarioCadastrar extends javax.swing.JFrame {
 
 
     private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
-        // TODO add your handling code here:
-        Usuario user = new Usuario();
-        user.setNome(jtfNome.getText());
-        user.setEmail(jtfEmail.getText());
-        user.setSenha(new String(jpfSenha.getPassword()));
-        if (user.getNome().isBlank() || user.getEmail().isBlank() || user.getSenha().isBlank()) {
-            JOptionPane.showMessageDialog(this, "Não pode ser nulo");
-        } else {
-            try {
-                UsuarioDao usuarioMethods = new UsuarioDao();
-                usuarioMethods.inserir(user);
-                JOptionPane.showMessageDialog(this, "Usuario Cadastrado");
-                jtfNome.setText("");
-                jtfEmail.setText("");
-                jpfSenha.setText("");
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Usuario Falhou .\n" + ex.getMessage());
-            }
-        }
+        cadastrar();
     }//GEN-LAST:event_jButtonCadastrarActionPerformed
 
     private void jpfSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jpfSenhaActionPerformed
@@ -217,4 +199,26 @@ public class UsuarioCadastrar extends javax.swing.JFrame {
     private javax.swing.JTextField jtfEmail;
     private javax.swing.JTextField jtfNome;
     // End of variables declaration//GEN-END:variables
+
+private void cadastrar(){
+// TODO add your handling code here:
+        Usuario user = new Usuario();
+        user.setNome(jtfNome.getText());
+        user.setEmail(jtfEmail.getText());
+        user.setSenha(new String(jpfSenha.getPassword()));
+        if (user.getNome().isBlank() || user.getEmail().isBlank() || user.getSenha().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Não pode ser nulo");
+        } else {
+            try {
+                UsuarioDao usuarioMethods = new UsuarioDao();
+                usuarioMethods.inserir(user);
+                JOptionPane.showMessageDialog(this, "Usuario Cadastrado");
+                jtfNome.setText("");
+                jtfEmail.setText("");
+                jpfSenha.setText("");
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Usuario Falhou .\n" + ex.getMessage());
+            }
+        }
+}
 }

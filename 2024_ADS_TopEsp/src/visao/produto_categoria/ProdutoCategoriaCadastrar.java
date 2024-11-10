@@ -103,21 +103,7 @@ public class ProdutoCategoriaCadastrar extends javax.swing.JFrame {
 
 
     private void jbCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarActionPerformed
-        // TODO add your handling code here:
-        ProdutoCategoria categoria = new ProdutoCategoria();
-        categoria.setNomeCategoria(jtfCategoria.getText());
-        if (categoria.getNomeCategoria().isBlank()) {
-            JOptionPane.showMessageDialog(this, "Não pode ser Nulo");
-        } else {
-            try {
-                ProdutoCategoriaDao categoriaMethods = new ProdutoCategoriaDao();
-                categoriaMethods.inserir(categoria);
-                JOptionPane.showMessageDialog(this, "Categoria Cadastrada");
-                jtfCategoria.setText("");
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Falha no cadastro da Categoria .\n" + ex.getMessage());
-            }
-        }
+        cadastrar();
     }//GEN-LAST:event_jbCadastrarActionPerformed
 
     private void jbFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbFecharActionPerformed
@@ -167,4 +153,20 @@ public class ProdutoCategoriaCadastrar extends javax.swing.JFrame {
     private javax.swing.JLabel jlGrupo;
     private javax.swing.JTextField jtfCategoria;
     // End of variables declaration//GEN-END:variables
+
+    private void cadastrar() {// TODO add your handling code here:
+        ProdutoCategoria categoria = new ProdutoCategoria();
+        categoria.setNomeCategoria(jtfCategoria.getText());
+        if (categoria.getNomeCategoria().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Não pode ser Nulo");
+        } else {
+            try {
+                ProdutoCategoriaDao categoriaMethods = new ProdutoCategoriaDao();
+                categoriaMethods.inserir(categoria);
+                JOptionPane.showMessageDialog(this, "Categoria Cadastrada");
+                jtfCategoria.setText("");
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Falha no cadastro da Categoria .\n" + ex.getMessage());
+            }
+        }}
 }

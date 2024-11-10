@@ -182,29 +182,7 @@ public class ProdutoGerenciar extends javax.swing.JFrame {
     }//GEN-LAST:event_jbAlterarActionPerformed
 
     private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExcluirActionPerformed
-        // TODO add your handling code here:
-        int linhaSelecionado = jtProdutos.getSelectedRow();
-        if (linhaSelecionado != -1) {
-            int opcao = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", JOptionPane.YES_NO_CANCEL_OPTION);
-            if (opcao == JOptionPane.YES_OPTION) {
-
-                int id = Integer.parseInt(jtProdutos.getModel().getValueAt(
-                        linhaSelecionado, 0).toString());
-                ProdutoDao dao = new ProdutoDao();
-                try {
-                    dao.excluir(id);
-                    JOptionPane.showMessageDialog(this, "Produto Excluido");
-                    DefaultTableModel modelo = ((DefaultTableModel) jtProdutos.getModel());
-                    modelo.removeRow(linhaSelecionado);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    JOptionPane.showMessageDialog(this, "Erro ao pesquisar: " + e.getMessage());
-                }
-
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Selecione um Registro para excluir");
-        }
+       excluir();
 
     }//GEN-LAST:event_jbExcluirActionPerformed
 
@@ -218,9 +196,9 @@ public class ProdutoGerenciar extends javax.swing.JFrame {
     }//GEN-LAST:event_jtfPesquisarKeyPressed
 
     private void jbListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbListarActionPerformed
-        
+
         listar();
-        
+
     }//GEN-LAST:event_jbListarActionPerformed
 
     /**
@@ -300,9 +278,9 @@ public class ProdutoGerenciar extends javax.swing.JFrame {
             ProdutoDao dao = new ProdutoDao();
             DefaultTableModel modelo = (DefaultTableModel) jtProdutos.getModel();
             modelo.setNumRows(0); // limpa os campos
-            
+
             List<Produto> lista = dao.listar();
-            
+
             for (Produto produto : lista) {
                 String[] linhadaTabela = {
                     String.valueOf(produto.getId()),
@@ -312,13 +290,37 @@ public class ProdutoGerenciar extends javax.swing.JFrame {
                 };
                 modelo.addRow(linhadaTabela); // adiciona uma linha na tabela
             }
-            
-            
+
         } catch (Exception e) {
-             e.printStackTrace();
-              JOptionPane.showMessageDialog(this, "Erro ao listar: " + e.getMessage());
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Erro ao listar: " + e.getMessage());
         }
 
+    }
+
+    private void excluir() {   // TODO add your handling code here:
+        int linhaSelecionado = jtProdutos.getSelectedRow();
+        if (linhaSelecionado != -1) {
+            int opcao = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", JOptionPane.YES_NO_CANCEL_OPTION);
+            if (opcao == JOptionPane.YES_OPTION) {
+
+                int id = Integer.parseInt(jtProdutos.getModel().getValueAt(
+                        linhaSelecionado, 0).toString());
+                ProdutoDao dao = new ProdutoDao();
+                try {
+                    dao.excluir(id);
+                    JOptionPane.showMessageDialog(this, "Produto Excluido");
+                    DefaultTableModel modelo = ((DefaultTableModel) jtProdutos.getModel());
+                    modelo.removeRow(linhaSelecionado);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(this, "Erro ao pesquisar: " + e.getMessage());
+                }
+
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um Registro para excluir");
+        }
     }
 
 }
