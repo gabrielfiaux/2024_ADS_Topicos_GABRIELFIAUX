@@ -4,6 +4,7 @@
  */
 package controlador;
 
+import controlador.conexao.Conexao;
 import java.sql.*;
 import java.util.List;
 import java.util.ArrayList;
@@ -63,4 +64,7 @@ public class GrupoUsuarioDao {
             throw ex;
         }
     }
+    
+    //alterar
+    
 }

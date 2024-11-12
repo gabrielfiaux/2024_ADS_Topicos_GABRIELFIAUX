@@ -4,11 +4,17 @@
  */
 package controlador;
 
+import controlador.conexao.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.Produto;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,7 +32,7 @@ public class ProdutoDao {
         } catch (Exception ex) {
             throw ex;
         }
-    }
+    } 
 
     public List<Produto> buscar(String nome) throws Exception {
         List<Produto> lista = new ArrayList<>();
@@ -58,6 +64,38 @@ public class ProdutoDao {
         }
         return lista;
     }
+    
+    public List<Produto> listar(){
+    String sql = "SELECT * FROM produto";
+    Connection conexao = null;
+        try {
+            conexao = Conexao.getConexao();
+        } catch (Exception ex) {
+            Logger.getLogger(ProdutoDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    List<Produto> lista = new ArrayList<>();
+    
+    
+        try {
+            PreparedStatement pstm = conexao.prepareStatement(sql);
+            ResultSet rs = pstm.executeQuery();
+            while(rs.next()){
+             Produto p = new Produto();
+             p.setId(rs.getInt("id"));
+             p.setNomeProduto(rs.getString("nome"));
+             p.setUnidadeDeMedida(rs.getString("unidadeDeMedida"));
+             p.setDataCadastro(rs.getString("datacadastro"));
+             lista.add(p);
+                
+            
+            }
+            
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ProdutoDao.listar");
+        }
+       return lista;
+    }
 
     public void excluir(Integer id) throws Exception {
         String sql = "DELETE FROM produto WHERE id = ?";
@@ -69,6 +107,22 @@ public class ProdutoDao {
         } catch (Exception ex) {
             throw ex;
         }
+    }
+    
+    public boolean alterar(Produto produto) throws SQLException, Exception{
+    
+        String sql = "UPDATE produto"
+                +" SET nome = ?"
+                +" unidadeDeMedida"
+                +" WHERE id = ?";
+      Connection conexao = Conexao.getConexao();
+        try(PreparedStatement pstm = conexao.prepareStatement(sql)){
+            pstm.setString(1, produto.getNomeProduto());
+            pstm.setString(2, produto.getUnidadeDeMedida());
+            pstm.setInt(3, produto.getId());
+            return pstm.executeUpdate() ==1;
+        }
+    
     }
 
 }

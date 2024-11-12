@@ -1,4 +1,5 @@
 package controlador;
+import controlador.conexao.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import modelo.Cliente;
@@ -20,4 +21,10 @@ public class ClienteDao {
         }
         return retorno;
     }
+    
+    //buscar
+    //listar
+    //excluir
+   //alterar
+   
 }

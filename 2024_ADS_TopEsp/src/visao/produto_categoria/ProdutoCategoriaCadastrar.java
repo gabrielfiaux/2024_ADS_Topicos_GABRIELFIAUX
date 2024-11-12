@@ -2,22 +2,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package visao;
+package visao.produto_categoria;
 
-import controlador.GrupoUsuarioDao;
+import controlador.ProdutoCategoriaDao;
 import javax.swing.JOptionPane;
-import modelo.GrupoUsuario;
+import modelo.ProdutoCategoria;
 
 /**
  *
  * @author Douglas Sugano
  */
-public class GrupoUsuarioCadastrar extends javax.swing.JFrame {
+public class ProdutoCategoriaCadastrar extends javax.swing.JFrame {
 
     /**
      * Creates new form GrupoUsuarioCadastrar
      */
-    public GrupoUsuarioCadastrar() {
+    public ProdutoCategoriaCadastrar() {
         initComponents();
     }
 
@@ -32,7 +32,7 @@ public class GrupoUsuarioCadastrar extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jlGrupo = new javax.swing.JLabel();
-        jtfGrupoUsuario = new javax.swing.JTextField();
+        jtfCategoria = new javax.swing.JTextField();
         jbCadastrar = new javax.swing.JButton();
         jbFechar = new javax.swing.JButton();
 
@@ -40,9 +40,9 @@ public class GrupoUsuarioCadastrar extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Cadastro de Grupo de Usuarios");
+        jLabel1.setText("Cadastro de Categoria de Produtos");
 
-        jlGrupo.setText("Grupo de Usuario: ");
+        jlGrupo.setText("Categoria:");
 
         jbCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
         jbCadastrar.setText("Cadastrar");
@@ -54,6 +54,11 @@ public class GrupoUsuarioCadastrar extends javax.swing.JFrame {
 
         jbFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jbFechar.setText("Fechar");
+        jbFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbFecharActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -63,16 +68,17 @@ public class GrupoUsuarioCadastrar extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jbFechar)
                         .addGap(18, 18, 18)
                         .addComponent(jbCadastrar))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
                         .addComponent(jlGrupo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfGrupoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jtfCategoria)))
                 .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
@@ -82,7 +88,7 @@ public class GrupoUsuarioCadastrar extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfGrupoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlGrupo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -97,22 +103,12 @@ public class GrupoUsuarioCadastrar extends javax.swing.JFrame {
 
 
     private void jbCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarActionPerformed
-        // TODO add your handling code here:
-        GrupoUsuario grupo = new GrupoUsuario(); 
-        grupo.setNomeGrupo(jtfGrupoUsuario.getText());
-        if (grupo.getNomeGrupo().isBlank()) {   
-            JOptionPane.showMessageDialog(this,"Não pode ser nulo");
-        } else{
-             try {
-                GrupoUsuarioDao grupoMethods = new GrupoUsuarioDao();
-                grupoMethods.inserir(grupo);
-                JOptionPane.showMessageDialog(this, "Grupo Cadastrado");
-                jtfGrupoUsuario.setText("");
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Usuario Falhou .\n" + ex.getMessage());
-            }
-        }
+        cadastrar();
     }//GEN-LAST:event_jbCadastrarActionPerformed
+
+    private void jbFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbFecharActionPerformed
+        dispose();
+    }//GEN-LAST:event_jbFecharActionPerformed
 
     /**
      * @param args the command line arguments
@@ -131,20 +127,21 @@ public class GrupoUsuarioCadastrar extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GrupoUsuarioCadastrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProdutoCategoriaCadastrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GrupoUsuarioCadastrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProdutoCategoriaCadastrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GrupoUsuarioCadastrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProdutoCategoriaCadastrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GrupoUsuarioCadastrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProdutoCategoriaCadastrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GrupoUsuarioCadastrar().setVisible(true);
+                new ProdutoCategoriaCadastrar().setVisible(true);
             }
         });
     }
@@ -154,6 +151,22 @@ public class GrupoUsuarioCadastrar extends javax.swing.JFrame {
     private javax.swing.JButton jbCadastrar;
     private javax.swing.JButton jbFechar;
     private javax.swing.JLabel jlGrupo;
-    private javax.swing.JTextField jtfGrupoUsuario;
+    private javax.swing.JTextField jtfCategoria;
     // End of variables declaration//GEN-END:variables
+
+    private void cadastrar() {// TODO add your handling code here:
+        ProdutoCategoria categoria = new ProdutoCategoria();
+        categoria.setNomeCategoria(jtfCategoria.getText());
+        if (categoria.getNomeCategoria().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Não pode ser Nulo");
+        } else {
+            try {
+                ProdutoCategoriaDao categoriaMethods = new ProdutoCategoriaDao();
+                categoriaMethods.inserir(categoria);
+                JOptionPane.showMessageDialog(this, "Categoria Cadastrada");
+                jtfCategoria.setText("");
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Falha no cadastro da Categoria .\n" + ex.getMessage());
+            }
+        }}
 }

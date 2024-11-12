@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package visao;
+package visao.usuario;
 
 /**
  *
@@ -73,6 +73,11 @@ public class UsuarioCadastrar extends javax.swing.JFrame {
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jButton2.setText("Fechar");
         jButton2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -137,30 +142,16 @@ public class UsuarioCadastrar extends javax.swing.JFrame {
 
 
     private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
-        // TODO add your handling code here:
-        Usuario user = new Usuario();
-        user.setNome(jtfNome.getText());
-        user.setEmail(jtfEmail.getText());
-        user.setSenha(new String(jpfSenha.getPassword()));
-        if (user.getNome().isBlank() || user.getEmail().isBlank() || user.getSenha().isBlank()) {
-            JOptionPane.showMessageDialog(this, "Não pode ser nulo");
-        } else {
-            try {
-                UsuarioDao usuarioMethods = new UsuarioDao();
-                usuarioMethods.inserir(user);
-                JOptionPane.showMessageDialog(this, "Usuario Cadastrado");
-                jtfNome.setText("");
-                jtfEmail.setText("");
-                jpfSenha.setText("");
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Usuario Falhou .\n" + ex.getMessage());
-            }
-        }
+        cadastrar();
     }//GEN-LAST:event_jButtonCadastrarActionPerformed
 
     private void jpfSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jpfSenhaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jpfSenhaActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -208,4 +199,26 @@ public class UsuarioCadastrar extends javax.swing.JFrame {
     private javax.swing.JTextField jtfEmail;
     private javax.swing.JTextField jtfNome;
     // End of variables declaration//GEN-END:variables
+
+private void cadastrar(){
+// TODO add your handling code here:
+        Usuario user = new Usuario();
+        user.setNome(jtfNome.getText());
+        user.setEmail(jtfEmail.getText());
+        user.setSenha(new String(jpfSenha.getPassword()));
+        if (user.getNome().isBlank() || user.getEmail().isBlank() || user.getSenha().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Não pode ser nulo");
+        } else {
+            try {
+                UsuarioDao usuarioMethods = new UsuarioDao();
+                usuarioMethods.inserir(user);
+                JOptionPane.showMessageDialog(this, "Usuario Cadastrado");
+                jtfNome.setText("");
+                jtfEmail.setText("");
+                jpfSenha.setText("");
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Usuario Falhou .\n" + ex.getMessage());
+            }
+        }
+}
 }

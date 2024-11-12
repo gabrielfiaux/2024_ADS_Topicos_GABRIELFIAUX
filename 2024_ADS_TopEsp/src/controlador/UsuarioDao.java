@@ -1,5 +1,6 @@
 package controlador;
 
+import controlador.conexao.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
@@ -113,12 +114,16 @@ public void inserir(Usuario u) throws Exception {
                 + "    where id     = ?";
 
         Connection conexao = Conexao.getConexao();
-        try ( PreparedStatement ps = conexao.prepareStatement(sql)) {
+        try ( PreparedStatement ps = conexao.prepareStatement(sql)) 
+        {
             ps.setString(1, u.getSenha());
             ps.setInt(2, u.getId());
 
             return ps.executeUpdate() == 1;
         }
+        
     }
+    
+    
 
 }
