@@ -21,4 +21,10 @@ public class ClienteDao {
         }
         return retorno;
     }
+    
+    //buscar
+    //listar
+    //excluir
+   //alterar
+   
 }

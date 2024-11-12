@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import modelo.Produto;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -106,6 +107,22 @@ public class ProdutoDao {
         } catch (Exception ex) {
             throw ex;
         }
+    }
+    
+    public boolean alterar(Produto produto) throws SQLException, Exception{
+    
+        String sql = "UPDATE produto"
+                +" SET nome = ?"
+                +" unidadeDeMedida"
+                +" WHERE id = ?";
+      Connection conexao = Conexao.getConexao();
+        try(PreparedStatement pstm = conexao.prepareStatement(sql)){
+            pstm.setString(1, produto.getNomeProduto());
+            pstm.setString(2, produto.getUnidadeDeMedida());
+            pstm.setInt(3, produto.getId());
+            return pstm.executeUpdate() ==1;
+        }
+    
     }
 
 }

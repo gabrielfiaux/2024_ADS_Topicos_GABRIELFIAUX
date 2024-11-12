@@ -4,10 +4,10 @@
  */
 package visao.cliente;
 
-/**
- *
- * @author gfiau
- */
+//ola
+
+import javax.swing.table.DefaultTableModel;
+
 public class ClienteGerenciar extends javax.swing.JFrame {
 
     /**
@@ -32,7 +32,7 @@ public class ClienteGerenciar extends javax.swing.JFrame {
         jtfPesquisa = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtbUsuario = new javax.swing.JTable();
+        jtbCliente = new javax.swing.JTable();
         jlbinformacoesAdicionais1 = new javax.swing.JLabel();
         jlbinformacoesAdicionais2 = new javax.swing.JLabel();
         btnExcluir = new javax.swing.JButton();
@@ -61,7 +61,7 @@ public class ClienteGerenciar extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jtbUsuario.setModel(new javax.swing.table.DefaultTableModel(
+        jtbCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -84,12 +84,12 @@ public class ClienteGerenciar extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jtbUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+        jtbCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtbUsuarioMouseClicked(evt);
+                jtbClienteMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jtbUsuario);
+        jScrollPane1.setViewportView(jtbCliente);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -173,72 +173,20 @@ public class ClienteGerenciar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        cadastrar();
+        //cadastrar();
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void jtfPesquisaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfPesquisaKeyReleased
-        String campoPesquisa = jtfPesquisa.getText();
-        DefaultTableModel modelo = (DefaultTableModel) jtbUsuario.getModel();
-        modelo.setNumRows(0); // limpa os campos
-
-        try {
-            UsuarioDao dao = new UsuarioDao();
-            List<Usuario> lista = dao.buscar(campoPesquisa);
-
-            for (Usuario usuario : lista) {
-                String[] linhadaTabela = {
-                    String.valueOf(usuario.getId()),
-                    usuario.getNome(),
-                    usuario.getEmail(),
-                    usuario.getDataCadastro(),};
-                modelo.addRow(linhadaTabela); // adiciona uma linha na tabela
-
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Erro ao pesquisar: " + e.getMessage());
-
-        }
+       
+        
     }//GEN-LAST:event_jtfPesquisaKeyReleased
 
-    private void jtbUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbUsuarioMouseClicked
-        // TODO add your handling code here:
-        if (evt.getClickCount() == 2) {
-            int linhaSelecionada = jtbUsuario.getSelectedRow();
-            Integer id = Integer.parseInt(
-                jtbUsuario.getModel().getValueAt(linhaSelecionada, 0).toString()
-            );
-            UsuarioAlterar form = new UsuarioAlterar();
-            form.setVisible(true);
-            form.linkUsuarioGerenciarForm = this;
-            form.mostrarUsuario(id);
-        }
-    }//GEN-LAST:event_jtbUsuarioMouseClicked
+    private void jtbClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbClienteMouseClicked
+      
+    }//GEN-LAST:event_jtbClienteMouseClicked
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        int linhaSelecionado = jtbUsuario.getSelectedRow();
-        if (linhaSelecionado != -1) {
-            int opcao = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", JOptionPane.YES_NO_CANCEL_OPTION);
-            if (opcao == JOptionPane.YES_OPTION) {
-
-                int id = Integer.parseInt(jtbUsuario.getModel().getValueAt(
-                    linhaSelecionado, 0).toString());
-            UsuarioDao dao = new UsuarioDao();
-            try {
-                dao.excluir(id);
-                JOptionPane.showMessageDialog(this, "Usuario Excluido");
-                DefaultTableModel modelo = ((DefaultTableModel) jtbUsuario.getModel());
-                modelo.removeRow(linhaSelecionado);
-            } catch (Exception e) {
-                e.printStackTrace();
-                JOptionPane.showMessageDialog(this, "Erro ao pesquisar: " + e.getMessage());
-            }
-
-        }
-        } else{
-            JOptionPane.showMessageDialog(null, "Selecione um Registro para excluir");
-        }
+      
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     /**
@@ -285,7 +233,7 @@ public class ClienteGerenciar extends javax.swing.JFrame {
     private javax.swing.JLabel jlbTitulo;
     private javax.swing.JLabel jlbinformacoesAdicionais1;
     private javax.swing.JLabel jlbinformacoesAdicionais2;
-    private javax.swing.JTable jtbUsuario;
+    private javax.swing.JTable jtbCliente;
     private javax.swing.JTextField jtfPesquisa;
     // End of variables declaration//GEN-END:variables
 }
