@@ -4,6 +4,9 @@
  */
 package visao.produto;
 
+import controlador.ProdutoDao;
+import modelo.Produto;
+
 /**
  *
  * @author gfiau
@@ -26,21 +29,102 @@ public class ProdutoAlterar extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jtfNome = new javax.swing.JTextField();
+        jtfUnidade = new javax.swing.JTextField();
+        jbAlterar = new javax.swing.JButton();
+        jbFechar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Alterar Produto");
+
+        jtfNome.setToolTipText("");
+
+        jbAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/alterar.png"))); // NOI18N
+        jbAlterar.setText("Alterar");
+        jbAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAlterarActionPerformed(evt);
+            }
+        });
+
+        jbFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
+        jbFechar.setText("Fechar");
+        jbFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbFecharActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Nome:");
+
+        jLabel3.setText("Unidade:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2))
+                .addContainerGap(330, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(12, 12, 12)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jtfNome)
+                                .addComponent(jtfUnidade, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(jbFechar)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jbAlterar)))))
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(106, 106, 106)
+                .addComponent(jLabel2)
+                .addGap(43, 43, 43)
+                .addComponent(jLabel3)
+                .addContainerGap(119, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(10, 10, 10)
+                    .addComponent(jLabel1)
+                    .addGap(84, 84, 84)
+                    .addComponent(jtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(34, 34, 34)
+                    .addComponent(jtfUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jbAlterar)
+                        .addComponent(jbFechar))
+                    .addGap(10, 10, 10)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlterarActionPerformed
+
+        
+    }//GEN-LAST:event_jbAlterarActionPerformed
+
+    private void jbFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbFecharActionPerformed
+        dispose();
+    }//GEN-LAST:event_jbFecharActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +162,23 @@ public class ProdutoAlterar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton jbAlterar;
+    private javax.swing.JButton jbFechar;
+    private javax.swing.JTextField jtfNome;
+    private javax.swing.JTextField jtfUnidade;
     // End of variables declaration//GEN-END:variables
+private void alterar() throws Exception{
+Produto produto = new Produto();
+
+ produto.setNomeProduto(jtfNome.getText());
+ produto.setUnidadeDeMedida(jtfUnidade.getText());
+
+    ProdutoDao dao = new ProdutoDao();
+    dao.inserir(produto);
+ 
+}
+
 }

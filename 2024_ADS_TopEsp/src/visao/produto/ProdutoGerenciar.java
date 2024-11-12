@@ -29,6 +29,11 @@ public class ProdutoGerenciar extends javax.swing.JFrame {
         ProdutoCadastrar p = new ProdutoCadastrar();
         p.setVisible(true);
     }        // TODO add your handling code here:
+    
+    private void alterar(){
+    ProdutoAlterar alterar = new ProdutoAlterar();
+    alterar.setVisible(true);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -178,7 +183,7 @@ public class ProdutoGerenciar extends javax.swing.JFrame {
     }//GEN-LAST:event_jtfPesquisarActionPerformed
 
     private void jbAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlterarActionPerformed
-        // TODO add your handling code here:
+       alterar();
     }//GEN-LAST:event_jbAlterarActionPerformed
 
     private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExcluirActionPerformed
