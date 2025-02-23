@@ -6,10 +6,12 @@ package visao;
 
 import controlador.PedidoDao;
 import controlador.ProdutoDao;
+import java.util.HashSet;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import modelo.ItensPedido;
@@ -102,19 +104,20 @@ public class TelaRestaurante extends javax.swing.JFrame {
         btnSalvarPedido = new javax.swing.JButton();
         lblValorTNovoP = new javax.swing.JLabel();
         tfValorTNovoP = new javax.swing.JTextField();
+        btnLimpar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         pPrincipal.setBackground(new java.awt.Color(102, 102, 102));
 
-        pCabecalho.setBackground(new java.awt.Color(255, 204, 204));
+        pCabecalho.setBackground(new java.awt.Color(255, 255, 102));
 
         btnSair.setText("Exit");
 
         lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/restaurante.png"))); // NOI18N
 
         lblPrincipal.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        lblPrincipal.setText("Restaurante do JAPA");
+        lblPrincipal.setText("Dogão do Gab");
 
         javax.swing.GroupLayout pCabecalhoLayout = new javax.swing.GroupLayout(pCabecalho);
         pCabecalho.setLayout(pCabecalhoLayout);
@@ -647,6 +650,14 @@ public class TelaRestaurante extends javax.swing.JFrame {
         tfValorTNovoP.setEditable(false);
         tfValorTNovoP.setText("0.00");
 
+        btnLimpar.setText("Limpar");
+        btnLimpar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pNovoPedidoLayout = new javax.swing.GroupLayout(pNovoPedido);
         pNovoPedido.setLayout(pNovoPedidoLayout);
         pNovoPedidoLayout.setHorizontalGroup(
@@ -671,7 +682,8 @@ public class TelaRestaurante extends javax.swing.JFrame {
                                 .addGap(6, 6, 6)
                                 .addComponent(lblIconAddRem))
                             .addComponent(btnAdicionar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
-                            .addComponent(btnRemover, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(btnRemover, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnLimpar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pNovoPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pNovoPedidoLayout.createSequentialGroup()
@@ -712,14 +724,15 @@ public class TelaRestaurante extends javax.swing.JFrame {
                                 .addComponent(lblIconAddRem)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnRemover)
-                                .addGap(0, 137, Short.MAX_VALUE))))
-                    .addGroup(pNovoPedidoLayout.createSequentialGroup()
-                        .addComponent(spItensP, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pNovoPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnSalvarPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblValorTNovoP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tfValorTNovoP))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                                .addComponent(btnLimpar)
+                                .addGap(10, 10, 10))))
+                    .addComponent(spItensP, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pNovoPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnSalvarPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblValorTNovoP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tfValorTNovoP))
                 .addContainerGap())
         );
 
@@ -845,6 +858,19 @@ public class TelaRestaurante extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfQuantidadeActionPerformed
 
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        // Obtém a JTable dentro do JScrollPane
+        JTable tabela = (JTable) spItensP.getViewport().getView();
+
+        // Verifica se a tabela não é nula
+        if (tabela != null) {
+            DefaultTableModel model = (DefaultTableModel) tabela.getModel();
+            model.setRowCount(0); // Remove todas as linhas
+        }
+
+
+    }//GEN-LAST:event_btnLimparActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -915,6 +941,7 @@ public class TelaRestaurante extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
+    private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnRemover;
     private javax.swing.JButton btnSair;
     private javax.swing.JButton btnSalvarPedido;
