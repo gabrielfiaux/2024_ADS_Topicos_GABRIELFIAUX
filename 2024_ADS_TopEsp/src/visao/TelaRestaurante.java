@@ -859,16 +859,7 @@ public class TelaRestaurante extends javax.swing.JFrame {
     }//GEN-LAST:event_tfQuantidadeActionPerformed
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-        // Obtém a JTable dentro do JScrollPane
-        JTable tabela = (JTable) spItensP.getViewport().getView();
-
-        // Verifica se a tabela não é nula
-        if (tabela != null) {
-            DefaultTableModel model = (DefaultTableModel) tabela.getModel();
-            model.setRowCount(0); // Remove todas as linhas
-        }
-
-
+        limparTabelaItensPedido();
     }//GEN-LAST:event_btnLimparActionPerformed
 
     /**
