@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package visao.usuario_grupo;
+package visao.grupousuario;
 
 import controlador.GrupoUsuarioDao;
 import javax.swing.JOptionPane;
@@ -33,8 +33,8 @@ public class GrupoUsuarioCadastrar extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jlGrupo = new javax.swing.JLabel();
         jtfGrupoUsuario = new javax.swing.JTextField();
-        jbCadastrar = new javax.swing.JButton();
-        jbFechar = new javax.swing.JButton();
+        btnCadastrar = new javax.swing.JButton();
+        btnFechar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -44,19 +44,19 @@ public class GrupoUsuarioCadastrar extends javax.swing.JFrame {
 
         jlGrupo.setText("Grupo de Usuario: ");
 
-        jbCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
-        jbCadastrar.setText("Cadastrar");
-        jbCadastrar.addActionListener(new java.awt.event.ActionListener() {
+        btnCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
+        btnCadastrar.setText("Cadastrar");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbCadastrarActionPerformed(evt);
+                btnCadastrarActionPerformed(evt);
             }
         });
 
-        jbFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
-        jbFechar.setText("Fechar");
-        jbFechar.addActionListener(new java.awt.event.ActionListener() {
+        btnFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
+        btnFechar.setText("Fechar");
+        btnFechar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbFecharActionPerformed(evt);
+                btnFecharActionPerformed(evt);
             }
         });
 
@@ -71,9 +71,9 @@ public class GrupoUsuarioCadastrar extends javax.swing.JFrame {
                 .addGap(0, 26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jbFechar)
+                        .addComponent(btnFechar)
                         .addGap(18, 18, 18)
-                        .addComponent(jbCadastrar))
+                        .addComponent(btnCadastrar))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jlGrupo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -91,23 +91,35 @@ public class GrupoUsuarioCadastrar extends javax.swing.JFrame {
                     .addComponent(jlGrupo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbCadastrar)
-                    .addComponent(jbFechar))
+                    .addComponent(btnCadastrar)
+                    .addComponent(btnFechar))
                 .addGap(18, 18, 18))
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        // TODO add your handling code here:
+        if (!(jtfGrupoUsuario.getText().isBlank())) {
+            GrupoUsuario grupo = new GrupoUsuario();
+            grupo.setNomeGrupo(jtfGrupoUsuario.getText());
+            try {
+                GrupoUsuarioDao grupoMethods = new GrupoUsuarioDao();
+                grupoMethods.inserir(grupo);
+                JOptionPane.showMessageDialog(this, "Grupo Cadastrado");
+                jtfGrupoUsuario.setText("");
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Usuario Falhou .\n" + ex.getMessage());
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "O campo deve conter ao menos 1 caractere.");
+        }
+    }//GEN-LAST:event_btnCadastrarActionPerformed
 
-    private void jbCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarActionPerformed
-      cadastrar();
-    }//GEN-LAST:event_jbCadastrarActionPerformed
-
-    private void jbFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbFecharActionPerformed
+    private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
         dispose();
-    }//GEN-LAST:event_jbFecharActionPerformed
+    }//GEN-LAST:event_btnFecharActionPerformed
 
     /**
      * @param args the command line arguments
@@ -145,28 +157,10 @@ public class GrupoUsuarioCadastrar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnFechar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JButton jbCadastrar;
-    private javax.swing.JButton jbFechar;
     private javax.swing.JLabel jlGrupo;
     private javax.swing.JTextField jtfGrupoUsuario;
     // End of variables declaration//GEN-END:variables
-private void cadastrar(){
-      // TODO add your handling code here:
-        GrupoUsuario grupo = new GrupoUsuario(); 
-        grupo.setNomeGrupo(jtfGrupoUsuario.getText());
-        if (grupo.getNomeGrupo().isBlank()) {   
-            JOptionPane.showMessageDialog(this,"Não pode ser nulo");
-        } else{
-             try {
-                GrupoUsuarioDao grupoMethods = new GrupoUsuarioDao();
-                grupoMethods.inserir(grupo);
-                JOptionPane.showMessageDialog(this, "Grupo Cadastrado");
-                jtfGrupoUsuario.setText("");
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Usuario Falhou .\n" + ex.getMessage());
-            }
-        }
-}
-
 }

@@ -2,9 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package visao.usuario_grupo;
+package visao.grupousuario;
 
-import visao.usuario_grupo.GrupoUsuarioCadastrar;
+import visao.grupousuario.GrupoUsuarioCadastrar;
+import visao.grupousuario.GrupoUsuarioAlterar;
 import controlador.GrupoUsuarioDao;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -41,11 +42,11 @@ public class GrupoUsuarioGerenciar extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtGrupo = new javax.swing.JTable();
-        jbCadastrar = new javax.swing.JButton();
-        jbExcluir = new javax.swing.JButton();
-        jbAlterar = new javax.swing.JButton();
-        jlPesquisa = new javax.swing.JLabel();
+        jtblGrupoUsuario = new javax.swing.JTable();
+        btnCadastrar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
+        btnAlterar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jtfPesquisar = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -55,37 +56,50 @@ public class GrupoUsuarioGerenciar extends javax.swing.JFrame {
         jLabel1.setText("Grupo de Usuarios");
         jLabel1.setToolTipText("");
 
-        jtGrupo.setModel(new javax.swing.table.DefaultTableModel(
+        jtblGrupoUsuario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
                 "ID", "Nome do Grupo"
             }
         ));
-        jScrollPane1.setViewportView(jtGrupo);
+        jtblGrupoUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtblGrupoUsuarioMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jtblGrupoUsuario);
 
-        jbCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
-        jbCadastrar.setText("Cadastrar");
-        jbCadastrar.setToolTipText("");
-        jbCadastrar.addActionListener(new java.awt.event.ActionListener() {
+        btnCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
+        btnCadastrar.setText("Cadastrar");
+        btnCadastrar.setToolTipText("");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbCadastrarActionPerformed(evt);
+                btnCadastrarActionPerformed(evt);
             }
         });
 
-        jbExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluir.png"))); // NOI18N
-        jbExcluir.setText("Excluir");
-        jbExcluir.addActionListener(new java.awt.event.ActionListener() {
+        btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluir.png"))); // NOI18N
+        btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbExcluirActionPerformed(evt);
+                btnExcluirActionPerformed(evt);
             }
         });
 
-        jbAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/alterar.png"))); // NOI18N
-        jbAlterar.setText("Alterar");
+        btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/alterar.png"))); // NOI18N
+        btnAlterar.setText("Alterar");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
 
-        jlPesquisa.setText("Pesquisar:");
+        jLabel2.setText("Pesquisar:");
 
         jtfPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,63 +116,63 @@ public class GrupoUsuarioGerenciar extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 358, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jbCadastrar, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jbAlterar)
-                                .addGap(18, 18, 18)
-                                .addComponent(jbExcluir))))
-                    .addGroup(layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jlPesquisa)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtfPesquisar)))))
+                                .addComponent(jtfPesquisar)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnCadastrar))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnAlterar)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnExcluir)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbCadastrar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlPesquisa)
-                    .addComponent(jtfPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnCadastrar)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(jtfPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbExcluir)
-                    .addComponent(jbAlterar))
-                .addContainerGap())
+                    .addComponent(btnAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(27, 27, 27))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarActionPerformed
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         // TODO add your handling code here:
         cadastrar();
-    }//GEN-LAST:event_jbCadastrarActionPerformed
+    }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void jtfPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfPesquisarActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jtfPesquisarActionPerformed
 
     private void jtfPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfPesquisarKeyReleased
-        // TODO add your handling code here:
         String campoPesquisa = jtfPesquisar.getText();
-        DefaultTableModel modelo = (DefaultTableModel) jtGrupo.getModel();
+
+        DefaultTableModel modelo = (DefaultTableModel) jtblGrupoUsuario.getModel();
         modelo.setNumRows(0); // limpa os campos
 
         try {
@@ -181,31 +195,42 @@ public class GrupoUsuarioGerenciar extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jtfPesquisarKeyReleased
 
-    private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExcluirActionPerformed
-        // TODO add your handling code here:
-        int linhaSelecionado = jtGrupo.getSelectedRow();
-        if (linhaSelecionado != -1) {
-            int opcao = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", JOptionPane.YES_NO_CANCEL_OPTION);
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        Integer linhaSelecionada = jtblGrupoUsuario.getSelectedRow();
+        if (!(linhaSelecionada == -1)) {
+            int opcao = JOptionPane.showConfirmDialog(this, "Confirma exclusão?", "Excluir", JOptionPane.YES_NO_OPTION);
             if (opcao == JOptionPane.YES_OPTION) {
-
-                int id = Integer.parseInt(jtGrupo.getModel().getValueAt(
-                        linhaSelecionado, 0).toString());
-                GrupoUsuarioDao dao = new GrupoUsuarioDao();
+                int id = Integer.parseInt(jtblGrupoUsuario.getModel().getValueAt(linhaSelecionada, 0).toString());
                 try {
+                    GrupoUsuarioDao dao = new GrupoUsuarioDao();
                     dao.excluir(id);
-                    JOptionPane.showMessageDialog(this, "Grupo de Usuario Excluido");
-                    DefaultTableModel modelo = ((DefaultTableModel) jtGrupo.getModel());
-                    modelo.removeRow(linhaSelecionado);
+                    DefaultTableModel modelo = (DefaultTableModel) jtblGrupoUsuario.getModel();
+                    modelo.removeRow(linhaSelecionada);
+                    JOptionPane.showMessageDialog(this, "Registro excluido com sucesso!");
                 } catch (Exception e) {
-                    e.printStackTrace();
-                    JOptionPane.showMessageDialog(this, "Erro ao pesquisar: " + e.getMessage());
+                    System.out.println(e.getMessage());
                 }
-
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Selecione um Registro para excluir");
+            JOptionPane.showMessageDialog(this, "Você deve selecionar um registro para excluir.");
         }
-    }//GEN-LAST:event_jbExcluirActionPerformed
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void jtblGrupoUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblGrupoUsuarioMouseClicked
+        if (evt.getClickCount() == 2) {
+            int linhaSelecionada = jtblGrupoUsuario.getSelectedRow();
+            Integer id = Integer.parseInt(
+                    jtblGrupoUsuario.getModel().getValueAt(linhaSelecionada, 0).toString()
+            );
+            GrupoUsuarioAlterar form = new GrupoUsuarioAlterar();
+            form.setVisible(true);
+            form.mostrarGrupoUsuario(id);
+        }
+    }//GEN-LAST:event_jtblGrupoUsuarioMouseClicked
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAlterarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -243,13 +268,13 @@ public class GrupoUsuarioGerenciar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAlterar;
+    private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton jbAlterar;
-    private javax.swing.JButton jbCadastrar;
-    private javax.swing.JButton jbExcluir;
-    private javax.swing.JLabel jlPesquisa;
-    private javax.swing.JTable jtGrupo;
+    private javax.swing.JTable jtblGrupoUsuario;
     private javax.swing.JTextField jtfPesquisar;
     // End of variables declaration//GEN-END:variables
 }

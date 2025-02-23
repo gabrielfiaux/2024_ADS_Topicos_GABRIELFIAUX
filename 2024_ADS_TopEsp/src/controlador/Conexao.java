@@ -1,4 +1,4 @@
-package controlador.conexao;
+package controlador;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,11 +10,9 @@ public class Conexao {
 
     //construtor privado de conexao
     private Conexao() throws Exception {
-        
-        // nome do bd "topicos"
         try {
             String driver = "com.mysql.cj.jdbc.Driver";
-            String url = "jdbc:mysql://127.0.0.1/topicos";
+            String url = "jdbc:mysql://127.0.0.1/ifpr";
             String usuario = "root";
             String senha = "";
 
@@ -32,6 +30,11 @@ public class Conexao {
             new Conexao();
         }
         return conexao;
-
     }
+
+    public static void main(String[] args) throws Exception {
+
+        System.out.println(Conexao.getConexao());
+    }
+
 }

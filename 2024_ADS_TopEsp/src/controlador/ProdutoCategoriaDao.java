@@ -4,21 +4,15 @@
  */
 package controlador;
 
-import controlador.conexao.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import modelo.Produto;
 import modelo.ProdutoCategoria;
 
 /**
  *
- * @author Aluno
+ * @author gabrielfiaux
  */
 public class ProdutoCategoriaDao {
 
@@ -49,10 +43,10 @@ public class ProdutoCategoriaDao {
 
             try (java.sql.ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    ProdutoCategoria pc = new ProdutoCategoria();
-                    pc.setId(rs.getInt("id"));
-                    pc.setNomeCategoria(rs.getString("nome"));
-                    lista.add(pc);
+                    ProdutoCategoria p = new ProdutoCategoria();
+                    p.setId(rs.getInt("id"));
+                    p.setNomeCategoria(rs.getString("nome"));
+                    lista.add(p);
                 }
             }
 
@@ -62,45 +56,52 @@ public class ProdutoCategoriaDao {
         return lista;
     }
 
-    public List<ProdutoCategoria> listar(){
-    String sql = "SELECT * FROM produto_categoria";
-    Connection conexao = null;
-        try {
-            conexao = Conexao.getConexao();
-        } catch (Exception ex) {
-            Logger.getLogger(ProdutoCategoriaDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    List<ProdutoCategoria> lista = new ArrayList<>();
-    
-    
-        try {
-            PreparedStatement pstm = conexao.prepareStatement(sql);
-            ResultSet rs = pstm.executeQuery();
-            while (rs.next()) {
-                    ProdutoCategoria pc = new ProdutoCategoria();
-                    pc.setId(rs.getInt("id"));
-                    pc.setNomeCategoria(rs.getString("nome"));
-                    lista.add(pc);
-                }
-            
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ProdutoCadegoriaDao.listar");
-        }
-       return lista;
-    }
-    
-    public void excluir(Integer id) throws Exception {
+    public void excluir(int id) throws Exception {
         String sql = "DELETE FROM produto_categoria WHERE id = ?";
         Connection conexao = Conexao.getConexao();
         try (PreparedStatement ps = conexao.prepareStatement(sql)) {
             ps.setInt(1, id);
             ps.executeUpdate();
             ps.close();
-        } catch (Exception ex) {
-            throw ex;
+        } catch (Exception e) {
+            throw e;
         }
     }
     
-    // alterar
+    public ProdutoCategoria getProdutoCategoria(int id) throws Exception {
+        Connection conexao = Conexao.getConexao();
+        String sql = "select * from produto_categoria where id = ?";
+
+        ProdutoCategoria obj = null;
+
+        try ( PreparedStatement ps = conexao.prepareStatement(sql)) {
+            ps.setInt(1, id);
+
+            try ( java.sql.ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    obj = new ProdutoCategoria();
+                    obj.setId(rs.getInt("id"));
+                    obj.setNomeCategoria(rs.getString("nome"));
+                }
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+
+        return obj;
+    }
+
+    public boolean atualizar(ProdutoCategoria u) throws Exception {
+        String sql = "update produto_categoria"
+                + "      set nome   = ?"
+                + "    where id     = ?";
+
+        Connection conexao = Conexao.getConexao();
+        try ( PreparedStatement ps = conexao.prepareStatement(sql)) {
+            ps.setString(1, u.getNomeCategoria());
+            ps.setInt(2, u.getId());
+
+            return ps.executeUpdate() == 1;
+        }
+    }
 }

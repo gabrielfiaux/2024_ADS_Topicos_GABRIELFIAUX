@@ -7,11 +7,10 @@ package visao.produto;
 import controlador.ProdutoDao;
 import javax.swing.JOptionPane;
 import modelo.Produto;
-import visao.produto.ProdutoGerenciar;
 
 /**
  *
- * @author Douglas Sugano
+ * @author Aluno
  */
 public class ProdutoCadastrar extends javax.swing.JFrame {
 
@@ -33,11 +32,13 @@ public class ProdutoCadastrar extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jtfNome = new javax.swing.JTextField();
+        jtfNomeProduto = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jtfUnidade = new javax.swing.JTextField();
-        jbCadastrar = new javax.swing.JButton();
-        jbFechar = new javax.swing.JButton();
+        jtfUnidadeMed = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        tfValor = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -47,23 +48,29 @@ public class ProdutoCadastrar extends javax.swing.JFrame {
 
         jLabel2.setText("Nome");
 
-        jtfNome.setToolTipText("");
+        jLabel3.setText("UN");
 
-        jLabel3.setText("Unidade de Medida");
-
-        jbCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
-        jbCadastrar.setText("Cadastrar");
-        jbCadastrar.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
+        jButton1.setText("Cadastrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbCadastrarActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
-        jbFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
-        jbFechar.setText("Fechar");
-        jbFechar.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
+        jButton2.setText("Fechar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbFecharActionPerformed(evt);
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Valor");
+
+        tfValor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfValorActionPerformed(evt);
             }
         });
 
@@ -71,52 +78,88 @@ public class ProdutoCadastrar extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(jtfNome)
-                    .addComponent(jtfUnidade, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtfNomeProduto)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jtfUnidadeMed, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tfValor, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jbFechar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbCadastrar)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(62, 62, 62)
-                .addComponent(jLabel2)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbCadastrar)
-                    .addComponent(jbFechar))
-                .addGap(14, 14, 14))
+                    .addComponent(jLabel2)
+                    .addComponent(jtfNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jtfUnidadeMed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(tfValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarActionPerformed
-        cadastrar();
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (!(jtfNomeProduto.getText().isBlank())) {
+            if (!(jtfUnidadeMed.getText().isBlank())) {
+                Produto prod = new Produto();
+                prod.setNomeProduto(jtfNomeProduto.getText());
+                prod.setUnidadeDeMedida(jtfUnidadeMed.getText());
+                prod.setValor(Double.parseDouble(tfValor.getText()));
+                try {
+                    ProdutoDao produtoMethods = new ProdutoDao();
+                    produtoMethods.inserir(prod);
+                    JOptionPane.showMessageDialog(this, "Produto Cadastrado");
+                    jtfNomeProduto.setText("");
+                    jtfUnidadeMed.setText("");
+                    tfValor.setText("");
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Produto Falhou .\n" + ex.getMessage());
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "O campo Unidade de medido (UN) deve conter ao menos 1 caractere.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "O campo Nome deve conter ao menos 1 caractere.");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-    }//GEN-LAST:event_jbCadastrarActionPerformed
-
-    private void jbFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbFecharActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         dispose();
-    }//GEN-LAST:event_jbFecharActionPerformed
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void tfValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfValorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfValorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,33 +197,14 @@ public class ProdutoCadastrar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JButton jbCadastrar;
-    private javax.swing.JButton jbFechar;
-    private javax.swing.JTextField jtfNome;
-    private javax.swing.JTextField jtfUnidade;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JTextField jtfNomeProduto;
+    private javax.swing.JTextField jtfUnidadeMed;
+    private javax.swing.JTextField tfValor;
     // End of variables declaration//GEN-END:variables
-
-    private void cadastrar() {
-        Produto produto = new Produto();
-        produto.setNomeProduto(jtfNome.getText());
-        produto.setUnidadeDeMedida(jtfUnidade.getText());
-        if (produto.getNomeProduto().isBlank() || produto.getUnidadeDeMedida().isBlank()) {
-            JOptionPane.showMessageDialog(this, "Não pode ser nulo");
-        } else {
-            try {
-                ProdutoDao produtoMethods = new ProdutoDao();
-                produtoMethods.inserir(produto);
-                JOptionPane.showMessageDialog(this, "Produto Cadastrado");
-                jtfNome.setText("");
-                jtfUnidade.setText("");
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Cadastro de Produto Falhou \n" + ex.getMessage());
-            }
-        }
-
-    }
-
 }

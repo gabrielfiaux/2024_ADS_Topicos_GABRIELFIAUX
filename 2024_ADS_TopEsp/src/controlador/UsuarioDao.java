@@ -1,17 +1,15 @@
 package controlador;
 
-import controlador.conexao.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
 import modelo.Usuario;
 
-//todo DAO faz as transações de BD. Este DAO é o usuario. Logo, fará apenas transações com a tabela usuario;
+
 public class UsuarioDao {
 
-public void inserir(Usuario u) throws Exception {
+    public void inserir(Usuario u) throws Exception {
         String sql = "INSERT INTO usuario (nome,email,senha) values(?,?,?)";
         Connection conexao = Conexao.getConexao();
         try ( PreparedStatement ps = conexao.prepareStatement(sql)) {
@@ -114,16 +112,11 @@ public void inserir(Usuario u) throws Exception {
                 + "    where id     = ?";
 
         Connection conexao = Conexao.getConexao();
-        try ( PreparedStatement ps = conexao.prepareStatement(sql)) 
-        {
+        try ( PreparedStatement ps = conexao.prepareStatement(sql)) {
             ps.setString(1, u.getSenha());
             ps.setInt(2, u.getId());
 
             return ps.executeUpdate() == 1;
         }
-        
     }
-    
-    
-
 }

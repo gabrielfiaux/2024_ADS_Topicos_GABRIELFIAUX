@@ -17,8 +17,6 @@ public class UsuarioAlterar extends javax.swing.JFrame {
     /**
      * Creates new form UsuarioAlterar
      */
-    public UsuarioGerenciar linkUsuarioGerenciarForm;
-    
     public UsuarioAlterar() {
         initComponents();
     }
@@ -50,7 +48,7 @@ public class UsuarioAlterar extends javax.swing.JFrame {
         tfConfSenha = new javax.swing.JTextField();
         btnAltSenha = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Alterar Usuário");
@@ -212,7 +210,7 @@ public class UsuarioAlterar extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tpAlterarUsuario)
+                .addComponent(tpAlterarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -263,7 +261,6 @@ public class UsuarioAlterar extends javax.swing.JFrame {
             dao.atualizar(u);
 
             JOptionPane.showMessageDialog(this, "Registro atualizado com sucesso.");
-            linkUsuarioGerenciarForm.atualizarTabela();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
             e.printStackTrace();
@@ -295,9 +292,6 @@ public class UsuarioAlterar extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(UsuarioAlterar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

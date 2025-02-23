@@ -140,9 +140,34 @@ public class UsuarioCadastrar extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-
     private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
-        cadastrar();
+        // TODO add your handling code here:
+        if (!(jtfNome.getText().isBlank())) {
+            if (!(jtfEmail.getText().isBlank())) {
+                if ((jpfSenha.getPassword().length) != 0) {
+                    Usuario user = new Usuario();
+                    user.setNome(jtfNome.getText());
+                    user.setEmail(jtfEmail.getText());
+                    user.setSenha(new String(jpfSenha.getPassword()));
+                    try {
+                        UsuarioDao usuarioMethods = new UsuarioDao();
+                        usuarioMethods.inserir(user);
+                        JOptionPane.showMessageDialog(this, "Usuario Cadastrado");
+                        jtfNome.setText("");
+                        jtfEmail.setText("");
+                        jpfSenha.setText("");
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(this, "Usuario Falhou .\n" + ex.getMessage());
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "O campo Senha deve conter ao menos 1 caractere.");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "O campo Email deve conter ao menos 1 caractere.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "O campo Nome deve conter ao menos 1 caractere.");
+        }
     }//GEN-LAST:event_jButtonCadastrarActionPerformed
 
     private void jpfSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jpfSenhaActionPerformed
@@ -199,26 +224,4 @@ public class UsuarioCadastrar extends javax.swing.JFrame {
     private javax.swing.JTextField jtfEmail;
     private javax.swing.JTextField jtfNome;
     // End of variables declaration//GEN-END:variables
-
-private void cadastrar(){
-// TODO add your handling code here:
-        Usuario user = new Usuario();
-        user.setNome(jtfNome.getText());
-        user.setEmail(jtfEmail.getText());
-        user.setSenha(new String(jpfSenha.getPassword()));
-        if (user.getNome().isBlank() || user.getEmail().isBlank() || user.getSenha().isBlank()) {
-            JOptionPane.showMessageDialog(this, "Não pode ser nulo");
-        } else {
-            try {
-                UsuarioDao usuarioMethods = new UsuarioDao();
-                usuarioMethods.inserir(user);
-                JOptionPane.showMessageDialog(this, "Usuario Cadastrado");
-                jtfNome.setText("");
-                jtfEmail.setText("");
-                jpfSenha.setText("");
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Usuario Falhou .\n" + ex.getMessage());
-            }
-        }
-}
 }

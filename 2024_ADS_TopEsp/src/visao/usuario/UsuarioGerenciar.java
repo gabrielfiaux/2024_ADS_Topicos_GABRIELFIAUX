@@ -8,9 +8,8 @@ import visao.usuario.UsuarioCadastrar;
 import visao.usuario.UsuarioAlterar;
 import controlador.UsuarioDao;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import modelo.Usuario;
 
@@ -27,9 +26,7 @@ public class UsuarioGerenciar extends javax.swing.JFrame {
         initComponents();
         jtfPesquisaKeyReleased(null);
     }
-    public void atualizarTabela(){
-        jtfPesquisaKeyReleased(null);
-    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -187,30 +184,26 @@ public class UsuarioGerenciar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        int linhaSelecionado = jtbUsuario.getSelectedRow();
-        if (linhaSelecionado != -1) {
-            int opcao = JOptionPane.showConfirmDialog(this, "Confirmar Exclusão ?", "Excluir", JOptionPane.YES_NO_CANCEL_OPTION);
+        Integer linhaSelecionada = jtbUsuario.getSelectedRow();
+        if (!(linhaSelecionada == -1)) {
+            int opcao = JOptionPane.showConfirmDialog(this, "Confirma exclusão?", "Excluir", JOptionPane.YES_NO_OPTION);
             if (opcao == JOptionPane.YES_OPTION) {
-
-                int id = Integer.parseInt(jtbUsuario.getModel().getValueAt(
-                        linhaSelecionado, 0).toString());
-                UsuarioDao dao = new UsuarioDao();
+                int id = Integer.parseInt(jtbUsuario.getModel().getValueAt(linhaSelecionada, 0).toString());
                 try {
+                    UsuarioDao dao = new UsuarioDao();
                     dao.excluir(id);
-                    JOptionPane.showMessageDialog(this, "Usuario Excluido");
-                    DefaultTableModel modelo = ((DefaultTableModel) jtbUsuario.getModel());
-                    modelo.removeRow(linhaSelecionado);
+                    DefaultTableModel modelo = (DefaultTableModel) jtbUsuario.getModel();
+                    modelo.removeRow(linhaSelecionada);
+                    JOptionPane.showMessageDialog(this, "Registro excluido com sucesso!");
                 } catch (Exception e) {
-                    e.printStackTrace();
-                    JOptionPane.showMessageDialog(this, "Erro ao pesquisar: " + e.getMessage());
+                    System.out.println(e.getMessage());
                 }
-
             }
-        } else{
-            JOptionPane.showMessageDialog(null, "Selecione um Registro para excluir");
+        } else {
+            JOptionPane.showMessageDialog(this, "Você deve selecionar um registro para excluir.");
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
-
+    
     private void cadastrar() {
         UsuarioCadastrar uc = new UsuarioCadastrar();
         uc.setVisible(true);
@@ -221,13 +214,14 @@ public class UsuarioGerenciar extends javax.swing.JFrame {
 
     private void jtfPesquisaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfPesquisaKeyReleased
         String campoPesquisa = jtfPesquisa.getText();
+        
         DefaultTableModel modelo = (DefaultTableModel) jtbUsuario.getModel();
         modelo.setNumRows(0); // limpa os campos
 
         try {
             UsuarioDao dao = new UsuarioDao();
             List<Usuario> lista = dao.buscar(campoPesquisa);
-
+            
             for (Usuario usuario : lista) {
                 String[] linhadaTabela = {
                     String.valueOf(usuario.getId()),
@@ -237,26 +231,24 @@ public class UsuarioGerenciar extends javax.swing.JFrame {
                 modelo.addRow(linhadaTabela); // adiciona uma linha na tabela
 
             }
-
+            
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Erro ao pesquisar: " + e.getMessage());
-
+            
         }
     }//GEN-LAST:event_jtfPesquisaKeyReleased
 
     private void jtbUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbUsuarioMouseClicked
-        // TODO add your handling code here:
-         if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 2) {
             int linhaSelecionada = jtbUsuario.getSelectedRow();
             Integer id = Integer.parseInt(
                     jtbUsuario.getModel().getValueAt(linhaSelecionada, 0).toString()
             );
             UsuarioAlterar form = new UsuarioAlterar();
             form.setVisible(true);
-            form.linkUsuarioGerenciarForm = this;
             form.mostrarUsuario(id);
-         }
+        }
     }//GEN-LAST:event_jtbUsuarioMouseClicked
 
     /**

@@ -3,8 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package modelo;
-import java.time.LocalDateTime;
+
 public class Usuario {
+
     private int id;
     private String nome;
     private String email;
@@ -18,6 +19,7 @@ public class Usuario {
     public void setDataCadastro(String dataCadastro) {
         this.dataCadastro = dataCadastro;
     }
+
     public int getId() {
         return id;
     }
@@ -25,7 +27,6 @@ public class Usuario {
     public void setId(int id) {
         this.id = id;
     }
-
 
     public String getNome() {
         return nome;
@@ -50,5 +51,5 @@ public class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-    
+
 }

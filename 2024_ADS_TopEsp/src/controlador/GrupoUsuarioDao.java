@@ -4,11 +4,9 @@
  */
 package controlador;
 
-import controlador.conexao.Conexao;
 import java.sql.*;
-import java.util.List;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
+import java.util.List;
 import modelo.GrupoUsuario;
 
 public class GrupoUsuarioDao {
@@ -53,18 +51,52 @@ public class GrupoUsuarioDao {
         return lista;
     }
 
-    public void excluir(Integer id) throws Exception {
+    public void excluir(int id) throws Exception {
         String sql = "DELETE FROM usuario_grupo WHERE id = ?";
         Connection conexao = Conexao.getConexao();
         try (PreparedStatement ps = conexao.prepareStatement(sql)) {
             ps.setInt(1, id);
             ps.executeUpdate();
             ps.close();
-        } catch (Exception ex) {
-            throw ex;
+        } catch (Exception e) {
+            throw e;
         }
     }
     
-    //alterar
-    
+    public GrupoUsuario getGrupoUsuario(int id) throws Exception {
+        Connection conexao = Conexao.getConexao();
+        String sql = "select * from usuario_grupo where id = ?";
+
+        GrupoUsuario obj = null;
+
+        try ( PreparedStatement ps = conexao.prepareStatement(sql)) {
+            ps.setInt(1, id);
+
+            try ( java.sql.ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    obj = new GrupoUsuario();
+                    obj.setId(rs.getInt("id"));
+                    obj.setNomeGrupo(rs.getString("nome"));
+                }
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+
+        return obj;
+    }
+
+    public boolean atualizar(GrupoUsuario u) throws Exception {
+        String sql = "update usuario_grupo"
+                + "      set nome   = ?"
+                + "    where id     = ?";
+
+        Connection conexao = Conexao.getConexao();
+        try ( PreparedStatement ps = conexao.prepareStatement(sql)) {
+            ps.setString(1, u.getNomeGrupo());
+            ps.setInt(2, u.getId());
+
+            return ps.executeUpdate() == 1;
+        }
+    }
 }

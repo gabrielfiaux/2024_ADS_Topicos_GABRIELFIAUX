@@ -5,9 +5,9 @@
 package visao;
 
 import visao.usuario.UsuarioGerenciar;
-import visao.usuario_grupo.GrupoUsuarioGerenciar;
-import visao.produto_categoria.CategoriaProdutoGerenciar;
 import visao.produto.ProdutoGerenciar;
+import visao.grupousuario.GrupoUsuarioGerenciar;
+import visao.categoriaproduto.CategoriaProdutoGerenciar;
 
 /**
  *
@@ -31,6 +31,7 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jmProduto = new javax.swing.JMenuItem();
@@ -42,6 +43,14 @@ public class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Principal");
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/restaurante.png"))); // NOI18N
+        jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("Gerenciar");
 
@@ -92,11 +101,17 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 690, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(584, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 377, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(271, Short.MAX_VALUE))
         );
 
         pack();
@@ -113,15 +128,19 @@ public class Principal extends javax.swing.JFrame {
         new UsuarioGerenciar().setVisible(true);
     }//GEN-LAST:event_jmUsuarioActionPerformed
 
+    private void jmCategoriaProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCategoriaProdutoActionPerformed
+        // TODO add your handling code here:
+        new CategoriaProdutoGerenciar().setVisible(true);
+    }//GEN-LAST:event_jmCategoriaProdutoActionPerformed
+
     private void jmGrupoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmGrupoUsuarioActionPerformed
         // TODO add your handling code here:
         new GrupoUsuarioGerenciar().setVisible(true);
     }//GEN-LAST:event_jmGrupoUsuarioActionPerformed
 
-    private void jmCategoriaProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCategoriaProdutoActionPerformed
-        // TODO add your handling code here:
-        new CategoriaProdutoGerenciar().setVisible(true);
-    }//GEN-LAST:event_jmCategoriaProdutoActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,6 +178,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
