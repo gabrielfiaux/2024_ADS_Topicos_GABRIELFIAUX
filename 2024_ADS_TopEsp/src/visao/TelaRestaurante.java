@@ -156,10 +156,10 @@ public class TelaRestaurante extends javax.swing.JFrame {
         lblIP.setText("192.168.56.1");
 
         lblHora.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblHora.setText("19:30:43");
+        lblHora.setText("19:00:00");
 
         lblData.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblData.setText("terça-feira 26/11/2024");
+        lblData.setText("terça-feira 25/02/2025");
 
         javax.swing.GroupLayout pRodaPeLayout = new javax.swing.GroupLayout(pRodaPe);
         pRodaPe.setLayout(pRodaPeLayout);
@@ -440,7 +440,7 @@ public class TelaRestaurante extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Produto", "Quantidade", "Valor Unitario", "Total"
             }
         ));
         spPedidosMesa.setViewportView(tblPedidos);
